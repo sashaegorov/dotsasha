@@ -103,10 +103,23 @@ if [ -f /etc/bash_completion ]; then
     . /etc/bash_completion
 fi
 
+# Полезные функции
+# Создать каталог и перейти в него.
+mdir () { mkdir -p "$1" && cd "$1"; }
+
 # Полезные алиасы для RVM.
 alias rvi='rvm info ruby,homes'
 alias rvl='rvm list'
 alias rvlk='rvm list known'
+alias rvg='rvm use 1.9.2@global'
+alias rvr='rvm use 1.9.2@rails3'
+
+# полезные алиасы для RubGems
+alias gec='gem cleanup'
+alias gei='gem install'
+alias gel='gem list'
+alias geu='gem update'
+alias geus='gem update --system'
 
 # Enable Ruby Environment Manager (RVM).
 # This should be done at the end of file.
