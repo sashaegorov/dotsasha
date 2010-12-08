@@ -98,3 +98,6 @@ if [ -f /etc/bash_completion ]; then
     . /etc/bash_completion
 fi
 
+# Enable Ruby Environment Manager (RVM).
+# This should be done at the end of file.
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
