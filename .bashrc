@@ -86,10 +86,15 @@ if [ -x /usr/bin/dircolors ]; then
     #alias egrep='egrep --color=auto'
 fi
 
-# some more ls aliases
-#alias ll='ls -l'
-#alias la='ls -A'
-#alias l='ls -CF'
+# Некоторые полезные алиасы.
+# `ls' and it's options.
+alias ll='ls -l'
+alias la='ls -A'
+alias l='ls -CF'
+# Обезболиватели.
+alias cp='cp -i'
+alias mv='mv -i'
+
 
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
@@ -97,6 +102,11 @@ fi
 if [ -f /etc/bash_completion ]; then
     . /etc/bash_completion
 fi
+
+# Полезные алиасы для RVM.
+alias rvi='rvm info ruby,homes'
+alias rvl='rvm list'
+alias rvlk='rvm list known'
 
 # Enable Ruby Environment Manager (RVM).
 # This should be done at the end of file.
