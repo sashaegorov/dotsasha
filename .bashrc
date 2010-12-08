@@ -5,13 +5,11 @@
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
-# don't put duplicate lines in the history. See bash(1) for more options
-# don't overwrite GNU Midnight Commander's setting of `ignorespace'.
-export HISTCONTROL=$HISTCONTROL${HISTCONTROL+,}ignoredups
-# ... or force ignoredups and ignorespace
-export HISTCONTROL=ignoreboth
+# Убивать дубликаты истории самым жестоким образом.
+export HISTCONTROL=ignoreboth,erasedups
 
-# append to the history file, don't overwrite it
+# Настройки оболчки.
+# Дописывать историю, не удалять.
 shopt -s histappend
 
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
@@ -106,6 +104,8 @@ fi
 # Полезные функции
 # Создать каталог и перейти в него.
 mdir () { mkdir -p "$1" && cd "$1"; }
+# Уникальные позиции истории комманд.
+huniq () { history | awk '{print $2}' | grep -e $1 | sort -s | uniq -c; }
 
 # Полезные алиасы для RVM.
 alias rvi='rvm info ruby,homes'
@@ -113,6 +113,8 @@ alias rvl='rvm list'
 alias rvlk='rvm list known'
 alias rvg='rvm use 1.9.2@global'
 alias rvr='rvm use 1.9.2@rails3'
+alias rvgl='rvm gemset list'
+alias rvgd='rvm gemset gemdir'
 
 # полезные алиасы для RubGems
 alias gec='gem cleanup'
