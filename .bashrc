@@ -5,14 +5,20 @@
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
-# Убивать дубликаты истории самым жестоким образом.
+# Настройка истории комманд
+# Убивать дубликаты истории самым жестоким образом
 export HISTCONTROL=ignoreboth,erasedups
+# Размер истории комманд
+export HISTFILESIZE=65536
+export HISTSIZE=32768
+# Формат времени истории комманд (2010-12-09 02:34:01 MSK)
+export HISTTIMEFORMAT='+%F %T %Z '
+# Игнорирова все двухбуквенные комманды
+export HISTIGNORE='??'
 
-# Настройки оболчки.
-# Дописывать историю, не удалять.
+# Настройки оболчки
+# Дописывать историю, не удалять
 shopt -s histappend
-
-# for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
