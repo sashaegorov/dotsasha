@@ -7,12 +7,12 @@
 
 # Настройка истории комманд
 # Убивать дубликаты истории самым жестоким образом
-export HISTCONTROL=ignoreboth,erasedups
+export HISTCONTROL=ignoreboth:erasedups
 # Размер истории комманд
 export HISTFILESIZE=65536
 export HISTSIZE=32768
 # Формат времени истории комманд (2010-12-09 02:34:01 MSK)
-export HISTTIMEFORMAT='+%F %T %Z '
+export HISTTIMEFORMAT='%F %T %Z '
 # Игнорирова все двухбуквенные комманды
 export HISTIGNORE='??'
 
@@ -111,7 +111,8 @@ fi
 # Создать каталог и перейти в него.
 mdir () { mkdir -p "$1" && cd "$1"; }
 # Уникальные позиции истории комманд.
-huniq () { history | awk '{print $2}' | grep -e $1 | sort -s | uniq -c; }
+# Функция с учётом того, что в истории имеется временная метка.
+huniq () { history | awk '{print $5}' | grep -e $1 | sort -s | uniq -c; }
 
 # Полезные алиасы для RVM.
 alias rvi='rvm info ruby,homes'
