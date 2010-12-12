@@ -93,12 +93,19 @@ if [ -x /usr/bin/dircolors ]; then
     #alias egrep='egrep --color=auto'
 fi
 
-# Некоторые полезные алиасы.
-# `ls' and it's options.
-alias ll='ls -l'
-alias la='ls -A'
-alias l='ls -CF'
-# Обезболиватели.
+# Некоторые полезные алиасы
+# `ls' and it's options
+alias l='ls -U1F'	# Простой вывод одной колонкой
+alias ll='ls -lhFrt'   	# Полный вывод
+alias la='ls -lUFa'    	# Полный вывод всех файлов
+alias lh='ls -lUFad .*'	# Полный вывод скрытых файлов
+alias lld='ls -lUd */' 	# Полный вывод каталогов
+
+# Навигация по каталогам
+alias ..='cd ..'
+alias ...='cd ../..'
+
+# Обезболиватели
 alias cp='cp -i'
 alias mv='mv -i'
 
@@ -113,12 +120,17 @@ fi
 # Пользовательские функции
 # Создать каталог и перейти в него
 md () { mkdir -p "$1" && cd "$1"; }
+
 # Уникальные позиции истории комманд
 # Функция с учётом того, что в истории имеется временная метка
 huniq () { history | awk '{print $5}' | grep -e $1 | sort -s | uniq -c; }
+
+# Функция перемещения конфигурационных файлов в Git-репозиторий
+dotsasha () { mv -i $1 dotsasha/ && ln -s dotsasha/$1 . && ls -lR */$1 $1; }
+
 # Тестирование цветов терминала
 # Оригинальный скрипт Todd Larason <jtl@molehill.org>
-color256 () { perl -e 'for ($red = 0; $red < 6; $red++) {for ($green = 0; $green < 6; $green++) {for ($blue = 0; $blue < 6; $blue++) {printf("\x1b]4;%d;rgb:%2.2x/%2.2x/%2.2x\x1b\\",16 + ($red * 36) + ($green * 6) + $blue,($red ? ($red * 40 + 55) : 0),($green ? ($green * 40 + 55) : 0),($blue ? ($blue * 40 + 55) : 0));}}}for ($gray = 0; $gray < 24; $gray++) {$level = ($gray * 10) + 8;printf("\x1b]4;%d;rgb:%2.2x/%2.2x/%2.2x\x1b\\",232 + $gray, $level, $level, $level);}print "System colors:\n";for ($color = 0; $color < 8; $color++) {print "\x1b[48;5;${color}m  ";}print "\x1b[0m\n";for ($color = 8; $color < 16; $color++) {print "\x1b[48;5;${color}m  ";}print "\x1b[0m\n\n";print "Color cube, 6x6x6:\n";for ($green = 0; $green < 6; $green++) {for ($red = 0; $red < 6; $red++) {for ($blue = 0; $blue < 6; $blue++) {$color = 16 + ($red * 36) + ($green * 6) + $blue;print "\x1b[48;5;${color}m  ";}print "\x1b[0m ";}print "\n";}print "Grayscale ramp:\n";for ($color = 232; $color < 256; $color++) {print "\x1b[48;5;${color}m  ";}print "\x1b[0m\n";' }
+color256 () { perl -e 'for ($red = 0; $red < 6; $red++) {for ($green = 0; $green < 6; $green++) {for ($blue = 0; $blue < 6; $blue++) {printf("\x1b]4;%d;rgb:%2.2x/%2.2x/%2.2x\x1b\\",16 + ($red * 36) + ($green * 6) + $blue,($red ? ($red * 40 + 55) : 0),($green ? ($green * 40 + 55) : 0),($blue ? ($blue * 40 + 55) : 0));}}}for ($gray = 0; $gray < 24; $gray++) {$level = ($gray * 10) + 8;printf("\x1b]4;%d;rgb:%2.2x/%2.2x/%2.2x\x1b\\",232 + $gray, $level, $level, $level);}print "System colors:\n";for ($color = 0; $color < 8; $color++) {print "\x1b[48;5;${color}m  ";}print "\x1b[0m\n";for ($color = 8; $color < 16; $color++) {print "\x1b[48;5;${color}m  ";}print "\x1b[0m\n\n";print "Color cube, 6x6x6:\n";for ($green = 0; $green < 6; $green++) {for ($red = 0; $red < 6; $red++) {for ($blue = 0; $blue < 6; $blue++) {$color = 16 + ($red * 36) + ($green * 6) + $blue;print "\x1b[48;5;${color}m  ";}print "\x1b[0m ";}print "\n";}print "Grayscale ramp:\n";for ($color = 232; $color < 256; $color++) {print "\x1b[48;5;${color}m  ";}print "\x1b[0m\n";'; }
 
 # Полезные алиасы для Git
 alias gits='git status'
@@ -126,6 +138,7 @@ alias gitd='git diff'
 alias gitc='git commit'
 alias gita='git add --interactive'
 alias giti='git instaweb'
+alias gitl='git log'
 
 # Полезные алиасы для перезапуска служб
 alias ngs='sudo /etc/init.d/nginx status'
