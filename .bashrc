@@ -114,6 +114,17 @@ mdir () { mkdir -p "$1" && cd "$1"; }
 # Функция с учётом того, что в истории имеется временная метка.
 huniq () { history | awk '{print $5}' | grep -e $1 | sort -s | uniq -c; }
 
+# Полезные алиасы для Git
+alias gits='git status'
+alias gitd='git diff'
+alias gitc='git commit'
+alias gita='git add --interactive'
+alias giti='git instaweb'
+
+# Полезные алиасы для перезапуска служб
+alias ngs='sudo /etc/init.d/nginx status'
+alias ngr='sudo /etc/init.d/nginx restart'
+
 # Полезные алиасы для RVM.
 alias rvi='rvm info ruby,homes'
 alias rvl='rvm list'
