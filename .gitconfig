@@ -1,0 +1,9 @@
+[user]
+	email = a.a.egoroff@gmail.com
+	name = Sasha Egorov
+[color]
+	ui = auto
+[instaweb]
+	httpd = webrick
+[core]
+	editor = vim
