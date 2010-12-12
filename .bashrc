@@ -24,6 +24,9 @@ shopt -s histappend
 # update the values of LINES and COLUMNS.
 shopt -s checkwinsize
 
+# Важные переменные окружения
+export EDITOR='vi'
+
 # make less more friendly for non-text input files, see lesspipe(1)
 #[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
@@ -107,12 +110,15 @@ if [ -f /etc/bash_completion ]; then
     . /etc/bash_completion
 fi
 
-# Полезные функции
-# Создать каталог и перейти в него.
-mdir () { mkdir -p "$1" && cd "$1"; }
-# Уникальные позиции истории комманд.
-# Функция с учётом того, что в истории имеется временная метка.
+# Пользовательские функции
+# Создать каталог и перейти в него
+md () { mkdir -p "$1" && cd "$1"; }
+# Уникальные позиции истории комманд
+# Функция с учётом того, что в истории имеется временная метка
 huniq () { history | awk '{print $5}' | grep -e $1 | sort -s | uniq -c; }
+# Тестирование цветов терминала
+# Оригинальный скрипт Todd Larason <jtl@molehill.org>
+color256 () { perl -e 'for ($red = 0; $red < 6; $red++) {for ($green = 0; $green < 6; $green++) {for ($blue = 0; $blue < 6; $blue++) {printf("\x1b]4;%d;rgb:%2.2x/%2.2x/%2.2x\x1b\\",16 + ($red * 36) + ($green * 6) + $blue,($red ? ($red * 40 + 55) : 0),($green ? ($green * 40 + 55) : 0),($blue ? ($blue * 40 + 55) : 0));}}}for ($gray = 0; $gray < 24; $gray++) {$level = ($gray * 10) + 8;printf("\x1b]4;%d;rgb:%2.2x/%2.2x/%2.2x\x1b\\",232 + $gray, $level, $level, $level);}print "System colors:\n";for ($color = 0; $color < 8; $color++) {print "\x1b[48;5;${color}m  ";}print "\x1b[0m\n";for ($color = 8; $color < 16; $color++) {print "\x1b[48;5;${color}m  ";}print "\x1b[0m\n\n";print "Color cube, 6x6x6:\n";for ($green = 0; $green < 6; $green++) {for ($red = 0; $red < 6; $red++) {for ($blue = 0; $blue < 6; $blue++) {$color = 16 + ($red * 36) + ($green * 6) + $blue;print "\x1b[48;5;${color}m  ";}print "\x1b[0m ";}print "\n";}print "Grayscale ramp:\n";for ($color = 232; $color < 256; $color++) {print "\x1b[48;5;${color}m  ";}print "\x1b[0m\n";' }
 
 # Полезные алиасы для Git
 alias gits='git status'
@@ -144,3 +150,4 @@ alias geus='gem update --system'
 # Enable Ruby Environment Manager (RVM).
 # This should be done at the end of file.
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
+
