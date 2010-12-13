@@ -13,7 +13,7 @@ export HISTFILESIZE=65536
 export HISTSIZE=32768
 # Формат времени истории комманд (2010-12-09 02:34:01 MSK)
 export HISTTIMEFORMAT='%F %T %Z '
-# Игнорирова все двухбуквенные комманды
+# Игнорировать все двухбуквенные комманды
 export HISTIGNORE='??'
 
 # Настройки оболчки
@@ -85,12 +85,12 @@ esac
 if [ -x /usr/bin/dircolors ]; then
     eval "`dircolors -b`"
     alias ls='ls --color=auto'
-    #alias dir='dir --color=auto'
-    #alias vdir='vdir --color=auto'
+    alias dir='dir --color=auto'
+    alias vdir='vdir --color=auto'
 
-    #alias grep='grep --color=auto'
-    #alias fgrep='fgrep --color=auto'
-    #alias egrep='egrep --color=auto'
+    alias grep='grep --color=auto'
+    alias fgrep='fgrep --color=auto'
+    alias egrep='egrep --color=auto'
 fi
 
 # Некоторые полезные алиасы
@@ -118,6 +118,9 @@ if [ -f /etc/bash_completion ]; then
 fi
 
 # Пользовательские функции
+# Настолько полезная штука, что это просто не передать словами - одни эмоции
+pgrep () { ps auxww | egrep --color=always "$1" | grep -v "egrep.*$1"; }
+
 # Создать каталог и перейти в него
 md () { mkdir -p "$1" && cd "$1"; }
 
