@@ -7,3 +7,5 @@
 	httpd = webrick
 [core]
 	editor = vim
+[merge]
+	tool = vimdiff
