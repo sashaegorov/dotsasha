@@ -1,8 +1,7 @@
-# ~/.bashrc: executed by bash(1) for non-login shells.
-# see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
-# for examples
+# Файл пользовательских настроек ~/.bashrc
+# Исполняется bash(1) для интерктивных сеансов.
 
-# If not running interactively, don't do anything
+# Если сеанс неинтерактивный, ничего не делаем
 [ -z "$PS1" ] && return
 
 # Настройка истории комманд
@@ -162,6 +161,7 @@ alias gei='gem install'
 alias gel='gem list'
 alias geu='gem update'
 alias geus='gem update --system'
+alias ges='gem search --remote'
 
 # Enable Ruby Environment Manager (RVM).
 # This should be done at the end of file.
