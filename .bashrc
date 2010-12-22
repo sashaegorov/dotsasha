@@ -4,6 +4,10 @@
 # Если сеанс неинтерактивный, ничего не делаем
 [ -z "$PS1" ] && return
 
+# Переменная окружения PATH
+# Erlang Erlang R14B01
+export PATH=${PATH}:/opt/erl14/bin/
+
 # Настройка истории комманд
 # Убивать дубликаты истории самым жестоким образом
 export HISTCONTROL=ignoreboth:erasedups
