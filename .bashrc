@@ -38,6 +38,51 @@ if [ -z "$debian_chroot" ] && [ -r /etc/debian_chroot ]; then
     debian_chroot=$(cat /etc/debian_chroot)
 fi
 
+# "Шпаргалка" цветов
+# Всё это пока в глобалоном простанстве имён.
+# Придумаю лучше - изменю, но скорее всего так и останется:)
+
+export COLD="\033[00m"   # Сброс цвета/фона
+
+# Обычные цвета
+export COLK="\033[0;30m" # Чёрный
+export COLR="\033[0;31m" # Красный
+export COLG="\033[0;32m" # Зелёный
+export COLY="\033[0;33m" # Жёлтый
+export COLB="\033[0;34m" # Синий
+export COLM="\033[0;35m" # Пурпурный
+export COLC="\033[0;36m" # Голубой
+export COLW="\033[0;37m" # Белый
+
+# Жирные
+export BLDK="\033[1;30m"
+export BLDR="\033[1;31m"
+export BLDG="\033[1;32m"
+export BLDY="\033[1;33m"
+export BLDB="\033[1;34m"
+export BLDM="\033[1;35m"
+export BLDC="\033[1;36m"
+export BLDW="\033[1;37m"
+
+# Фон
+export BCGK="\033[40m"
+export BCGR="\033[41m"
+export BCGG="\033[42m"
+export BCGY="\033[43m"
+export BCGB="\033[44m"
+export BCGM="\033[45m"
+export BCGC="\033[46m"
+export BCGW="\033[47m"
+
+# Вывод определённого цвета, если текущий каталог доступен пользователю на запись.
+function pwdcol() {
+    if [ -w ${PWD} ]; then
+        echo -e ${COLW}
+    else
+        echo -e ${BLDR}
+    fi
+}
+
 # set a fancy prompt (non-color, unless we know we "want" color)
 case "$TERM" in
     xterm-color) color_prompt=yes;;
@@ -60,16 +105,25 @@ if [ -n "$force_color_prompt" ]; then
 fi
 
 if [ "$color_prompt" = yes ]; then
-    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+    # Оригинальное приглашение
+    # PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+
+    # Управляющие последовательности всегда следует отбивать с помощью \[...\],
+    # чтобы не поломать приглашение при возврате длинных команд.
+    # Вызов функций или команд не редко должен осуществляться в \$(...),
+    # чтобы изменяемые значения изменялись в самом приглашении.
+    PS1="\u@\h:\[\$(pwdcol)\]\w\[${COLD}\]\$ "
 else
     PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
 fi
 unset color_prompt force_color_prompt
 
-# If this is an xterm set the title to user@host:dir
+# Для терминалов, поддерживающих эту возможность, можно установать заголовк окна/вкладки
 case "$TERM" in
 xterm*|rxvt*)
-    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
+    # Оригинальное приглашение
+    # PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
+    PS1="\[\e]0;\u@\h: \w\a\]$PS1"
     ;;
 *)
     ;;
