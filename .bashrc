@@ -77,18 +77,18 @@ export BCGW="\033[47m"
 # Вывод определённого цвета, если текущий каталог доступен пользователю на запись.
 function colpwd() {
     if [ -w ${PWD} ]; then
-        echo -e ${COLW}
+        echo -en ${COLW}
     else
-        echo -e ${BLDR}
+        echo -en ${BLDR}
     fi
 }
 
 # Вывод root более заметным образом.
 function coluser() {
     if [ $UID -eq 0 ]; then
-        echo -e ${BCGR}${BLDW}
+        echo -en ${BCGR}${BLDW}
     else
-        echo -e ${BLDW}
+        echo -en ${BLDW}
     fi
 }
 
@@ -120,7 +120,9 @@ if [ "$color_prompt" = yes ]; then
     # чтобы не поломать приглашение при возврате длинных команд.
     # Вызов функций или команд не редко должен осуществляться в \$(...),
     # чтобы изменяемые значения изменялись в самом приглашении.
-    PS1="\[\$(coluser)\]\u\[${COLD}@\h:\[\$(colpwd)\]\w\[${COLD}\]\$ "
+    # Эталонный рабочий вариант где ничего не поломано:,
+    # PS1="\[\$(coluser)\]\u\[${COLD}\]@\h:\[\$(colpwd)\]\w\[${COLD}\]\\$ "
+    PS1="\[\$(coluser)\]\u\[${COLD}\]@\h:\[\$(colpwd)\]\w\[${COLD}\]\\$ "
 else
     PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
 fi
@@ -233,4 +235,3 @@ alias ges='gem search --remote'
 # Enable Ruby Environment Manager (RVM).
 # This should be done at the end of file.
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
-
