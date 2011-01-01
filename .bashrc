@@ -75,11 +75,20 @@ export BCGC="\033[46m"
 export BCGW="\033[47m"
 
 # Вывод определённого цвета, если текущий каталог доступен пользователю на запись.
-function pwdcol() {
+function colpwd() {
     if [ -w ${PWD} ]; then
         echo -e ${COLW}
     else
         echo -e ${BLDR}
+    fi
+}
+
+# Вывод root более заметным образом.
+function coluser() {
+    if [ $UID -eq 0 ]; then
+        echo -e ${BCGR}${BLDW}
+    else
+        echo -e ${BLDW}
     fi
 }
 
@@ -95,24 +104,23 @@ esac
 
 if [ -n "$force_color_prompt" ]; then
     if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
-	# We have color support; assume it's compliant with Ecma-48
-	# (ISO/IEC-6429). (Lack of such support is extremely rare, and such
-	# a case would tend to support setf rather than setaf.)
-	color_prompt=yes
+        # We have color support; assume it's compliant with Ecma-48
+        # (ISO/IEC-6429). (Lack of such support is extremely rare, and such
+        # a case would tend to support setf rather than setaf.)
+        color_prompt=yes
     else
-	color_prompt=
+        color_prompt=
     fi
 fi
 
 if [ "$color_prompt" = yes ]; then
     # Оригинальное приглашение
     # PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
-
     # Управляющие последовательности всегда следует отбивать с помощью \[...\],
     # чтобы не поломать приглашение при возврате длинных команд.
     # Вызов функций или команд не редко должен осуществляться в \$(...),
     # чтобы изменяемые значения изменялись в самом приглашении.
-    PS1="\u@\h:\[\$(pwdcol)\]\w\[${COLD}\]\$ "
+    PS1="\[\$(coluser)\]\u\[${COLD}@\h:\[\$(colpwd)\]\w\[${COLD}\]\$ "
 else
     PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
 fi
@@ -152,11 +160,12 @@ fi
 
 # Некоторые полезные алиасы
 # `ls' and it's options
-alias l='ls -U1F'	# Простой вывод одной колонкой
-alias ll='ls -lhFrt'   	# Полный вывод
-alias la='ls -lUFa'    	# Полный вывод всех файлов
-alias lh='ls -lUFad .*'	# Полный вывод скрытых файлов
-alias lld='ls -lUd */' 	# Полный вывод каталогов
+alias l='ls -U1F'       # Простой вывод одной колонкой
+alias ll='ls -lhFrt'    # Полный вывод
+alias la='ls -lUFa'     # Полный вывод всех файлов
+alias lh='ls -lUFad .*' # Полный вывод скрытых файлов
+alias lld='ls -lUd */'  # Полный вывод каталогов
+alias lsln='ls -laF --color=always | grep lrwxrwxrwx'
 
 # Навигация по каталогам
 alias ..='cd ..'
