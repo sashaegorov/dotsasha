@@ -86,7 +86,7 @@ function colpwd() {
 # Вывод root более заметным образом.
 function coluser() {
     if [ $UID -eq 0 ]; then
-        echo -en ${BCGR}${BLDW}
+        echo -en ${BLDR}
     else
         echo -en ${BLDW}
     fi
@@ -133,7 +133,7 @@ case "$TERM" in
 xterm*|rxvt*)
     # Оригинальное приглашение
     # PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
-    PS1="\[\e]0;\u@\h: \w\a\]$PS1"
+    PS1="\[\e]0;\u@\h:\w\a\]${COLD}${PS1}"
     ;;
 *)
     ;;
