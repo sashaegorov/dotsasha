@@ -41,3 +41,19 @@ set hlsearch         " ...подсвечивать результаты,
 set ignorecase       " ...игоноригуя регистр
 set smartcase        " ...ну почти игнорируя...
 
+" Настройка орфографии
+setlocal nospell
+setlocal spelllang=ru,en
+" Меню проверки орфографии
+set wcm=<Tab>
+menu Spl.Suggest z=
+menu Spl.Next ]s
+menu Spl.Prev [s
+menu Spl.Add zg
+menu Spl.Ignore zG
+menu Spl.Wrong zw
+menu Spl.Info <Esc>:spellinfo<CR>
+imap <F7> <Esc>:set spell!<CR>
+nmap <F7> :set spell!<CR>
+imap <F8> <Esc>:emenu Spl.<TAB>
+nmap <F8> :emenu Spl.<TAB>
