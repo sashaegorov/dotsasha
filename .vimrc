@@ -59,3 +59,7 @@ nmap <F7> :set spell!<CR>
 imap <F8> <Esc>:emenu Spl.<TAB>
 nmap <F8> :emenu Spl.<TAB>
 
+" MiniBufferExplorer
+map <Leader>t :TMiniBufExplorer<CR>
+map <F9> :TMiniBufExplorer<CR>
+imap <F9> <Esc>:TMiniBufExplorer<CR>
