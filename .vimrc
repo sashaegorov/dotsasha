@@ -5,7 +5,9 @@ set t_Co=256
 set nocompatible
 syntax on
 filetype plugin indent on
-colorscheme railscasts
+" Настройки цветовой схемы
+let g:molokai_original = 1
+colorscheme molokai
 
 " Настройки отображения
 set backspace=2      " Фикс Backspace
@@ -22,7 +24,7 @@ set laststatus=2     " Всегда показывать строку стату
 
 " Отступы и табы, стрелки и точки
 set listchars=eol:¶,tab:>·,trail:·
-set list
+set nolist
 
 " Управление отступами и табами
 set ts=4             " Количество пробелов в табуляторе
