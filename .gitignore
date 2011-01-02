@@ -1,2 +1,6 @@
 .vim/doc/
 .vim/spell
+# Всё это пришлo c Command-T
+.vim/ruby/command-t
+.vim/.VimballRecord
+.vim/.netrwhist
