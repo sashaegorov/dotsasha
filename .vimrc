@@ -15,7 +15,7 @@ colorscheme molokai
 set backspace=2      " Фикс Backspace
 set number           " Включить нумерацию строк
 set numberwidth=5    " Ширина колонки с номерами строк
-set textwidth=0      " Не переносить по словам при вводе
+set textwidth=0      " Не перено
 set nowrap           " Не переносить по словам при просмотре
 set showcmd          " Отображать последнюю введенную команду
 set showmatch        " Отображать совпадающие скобки и т.д.
@@ -24,6 +24,7 @@ set wildmenu         " Продвинутое автозавершение ко�
 set visualbell       " Визуальный звонок вместо звукового
 set laststatus=2     " Всегда показывать строку статуса
 set statusline=%F\%1*%y%*%m%r:%n\ %w\%h\ %-14.18(%2*%3p%%%*\ %l/%L\:%c%)\ &#%04.4b\ &#x%04.4B\ %a
+set updatetime=1000  " Интервал общего обновления
 
 " Отключить всякого рода файлы-артефакты
 set nobackup
@@ -74,19 +75,21 @@ imap <F7> <Esc>:set spell!<CR>
 nmap <F7> :set spell!<CR>
 map <Leader>za :emenu Spell.<TAB>
 
-" MiniBufferExplorer
+" Minibuffer Explorer Settings
 map <Leader>tt :TMiniBufExplorer<CR>
-map <F9> :TMiniBufExplorer<CR>
-imap <F9> <Esc>:TMiniBufExplorer<CR>
+let g:miniBufExplMapWindowNavVim = 1
+let g:miniBufExplMapWindowNavArrows = 1
+let g:miniBufExplMapCTabSwitchBufs = 1
+let g:miniBufExplModSelTarget = 1
 
 " Настройка Command-T
 " Открывать по Ctrl-T и сразу чистить:
 map <C-t> :CommandT<CR><Tab><C-u><Tab>
 imap <C-t> <Esc>:CommandT<CR><Tab><C-u><Tab>
 nmap <silent> <Leader>t :CommandT<CR><Tab><C-u><Tab>
-let g:CommandTCancelMap=['<C-x>', '<C-c>']     " ...и закрывать также
-let g:CommandTAcceptSelectionTabMap=['<C-t>']  " Всё открываемые файлы по умолчанию открывать в табах
-let g:CommandTMaxHeight=15                     " Максимальная высота окна
+let g:CommandTCancelMap=['<C-t>']     " ...и закрывать также
+let g:CommandTAcceptSelectionTabMap=['<CR>']  " Всё открываемые файлы по умолчанию открывать в табах
+let g:CommandTMaxHeight=20                     " Максимальная высота окна
 let g:CommandTAlwaysShowDotFiles=1             " Показывать дот-файлы
 let g:CommandTScanDotDirectories=1             " Сканировать дот-каталоги
 
@@ -100,7 +103,19 @@ imap { {}<Left>
 " это пожалуй самое главное:
 set langmap=ёйцукенгшщзхъфывапролджэячсмитьбюЁЙЦУКЕHГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮ;`qwertyuiop[]asdfghjkl\\;'zxcvbnm\\,.~QWERTYUIOP{}ASDFGHJKL:\\"ZXCVBNM<>
 
+" Сброс подсветки результатов поиска
+map <silent> <Leader>ts :set hlsearch!<CR>
+
+" Управление табами
 nmap <F5> :tabprevious<CR>
 imap <F5> <Esc>:tabprevious<CR>i<Right>
 nmap <F6> :tabnext<CR>
 imap <F6> <Esc>:tabnext<CR>i<Right>
+
+" Настройка Tlist
+map <silent> <F9> :TlistToggle<CR>
+imap <silent> <F9> <Esc>:TlistToggle<CR>
+let Tlist_Auto_Open=1
+let Tlist_Auto_Update=1
+let Tlist_Highlight_Tag_On_BufEnter=1
+let Tlist_Compact_Format=1
