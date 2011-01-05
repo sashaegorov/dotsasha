@@ -25,6 +25,11 @@ set visualbell       " Визуальный звонок вместо звуко
 set laststatus=2     " Всегда показывать строку статуса
 set statusline=%F\%1*%y%*%m%r:%n\ %w\%h\ %-14.18(%2*%3p%%%*\ %l/%L\:%c%)\ &#%04.4b\ &#x%04.4B\ %a
 
+" Отключить всякого рода файлы-артефакты
+set nobackup
+set nowritebackup
+set noswapfile
+
 " Отступы и табы, стрелки и точки
 set listchars=eol:¶,tab:>·,trail:·
 set nolist
@@ -79,19 +84,23 @@ imap <F9> <Esc>:TMiniBufExplorer<CR>
 map <C-t> :CommandT<CR><Tab><C-u><Tab>
 imap <C-t> <Esc>:CommandT<CR><Tab><C-u><Tab>
 nmap <silent> <Leader>t :CommandT<CR><Tab><C-u><Tab>
-let g:CommandTCancelMap=['<C-t>']             " ...и закрывать также
-let g:CommandTAcceptSelectionTabMap=['<CR>']  " Всё открываемые файлы по умолчанию открывать в табах
-let g:CommandTMaxHeight=15                    " Максимальная высота окна
-let g:CommandTAlwaysShowDotFiles=1            " Показывать дот-файлы
-let g:CommandTScanDotDirectories=1            " Сканировать дот-каталоги
+let g:CommandTCancelMap=['<C-x>', '<C-c>']     " ...и закрывать также
+let g:CommandTAcceptSelectionTabMap=['<C-t>']  " Всё открываемые файлы по умолчанию открывать в табах
+let g:CommandTMaxHeight=15                     " Максимальная высота окна
+let g:CommandTAlwaysShowDotFiles=1             " Показывать дот-файлы
+let g:CommandTScanDotDirectories=1             " Сканировать дот-каталоги
 
 " Автоматическое закрытие скобок
 " http://jenyay.net/Programmg/Vim
-imap [ []<LEFT>
-imap ( ()<LEFT>
-imap { {}<LEFT>
+imap [ []<Left>
+imap ( ()<Left>
+imap { {}<Left>
 
 " Чтобы не ебануться на отличненко, при вводе на русском вперемешку с английским,
 " это пожалуй самое главное:
 set langmap=ёйцукенгшщзхъфывапролджэячсмитьбюЁЙЦУКЕHГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮ;`qwertyuiop[]asdfghjkl\\;'zxcvbnm\\,.~QWERTYUIOP{}ASDFGHJKL:\\"ZXCVBNM<>
 
+nmap <F5> :tabprevious<CR>
+imap <F5> <Esc>:tabprevious<CR>i<Right>
+nmap <F6> :tabnext<CR>
+imap <F6> <Esc>:tabnext<CR>i<Right>
