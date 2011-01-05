@@ -6,9 +6,9 @@
 
 # Переменная окружения PATH
 # Собственная сборка VIM 7.3 
-export PATH=/opt/vim73/bin/:$PATH
+export PATH=/opt/vim73/bin:$PATH
 # Erlang Erlang R14B01
-export PATH=/opt/erl14/bin/:$PATH
+export PATH=/opt/erl14/bin:$PATH
 
 # Настройка истории команд
 # Убивать дубликаты истории самым жестоким образом
