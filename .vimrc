@@ -1,5 +1,7 @@
-" Будем цветными!
+" Будем цветными и юникодными! 
 set t_Co=256
+set encoding=utf-8
+set fileencodings=utf-8
 
 " Будем модными новаторами
 set nocompatible
@@ -36,10 +38,13 @@ set listchars=eol:¶,tab:>·,trail:·
 set nolist
 
 " Управление отступами и табами
-set tabstop=2             " Количество пробелов в табуляторе
-set sw=2             " Количество пробелов в отступе
+set tabstop=2        " Количество пробелов в табуляторе
+set softtabstop=2
+set shiftwidth=2     " Количество пробелов в отступе
 set expandtab        " Заменять табулятор пробелами
 set autoindent       " Включить автоматические отступы
+set smarttab         " Умные отступы
+  
 
 " Настройка прокрутки и позиции курсора
 set scrolloff=12     " Держаться от краёв на расстоянии 12 строк
@@ -119,3 +124,4 @@ let Tlist_Auto_Open=1
 let Tlist_Auto_Update=1
 let Tlist_Highlight_Tag_On_BufEnter=1
 let Tlist_Compact_Format=1
+
