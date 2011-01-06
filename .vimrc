@@ -46,7 +46,7 @@ set autoindent       " Включить автоматические отсту�
 set smarttab         " Умные отступы
 
 " Фолдинг
-set foldenable        " Включить фолдинг
+set nofoldenable      " Выключить фолдинг. Юзаем zi...
 set foldmethod=indent " Метод фолдинга по отступам. Python;)
 set foldnestmax=3     " Максимальная вложенность 3 уровня
 set foldopen=all      " Автораскрытие при наведении курсора
@@ -126,8 +126,22 @@ imap <F6> <Esc>:tabnext<CR>i<Right>
 " Настройка Tlist
 map <silent> <F9> :TlistToggle<CR>
 imap <silent> <F9> <Esc>:TlistToggle<CR>
-let Tlist_Auto_Open=1
+let Tlist_Auto_Open=0
 let Tlist_Auto_Update=1
 let Tlist_Highlight_Tag_On_BufEnter=1
 let Tlist_Compact_Format=1
+let Tlist_Close_On_Select=1
+let Tlist_Exit_OnlyWindow=1
+let Tlist_GainFocus_On_ToggleOpen=1
+let Tlist_WinWidth=24
+let Tlist_Enable_Fold_Column=0
 
+" Настройка NERDTree
+map <silent> <F10> :NERDTreeToggle<CR>
+imap <silent> <F10> <Esc>:NERDTreeToggle<CR>
+let NERDTreeShowHidden=1
+let NERDChristmasTree=1
+let NERDTreeQuitOnOpen=1
+let NERDTreeWinPos='left'
+let NERDTreeWinSize=24
+let NERDTreeChDirMode=2
