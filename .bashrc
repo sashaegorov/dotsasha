@@ -191,6 +191,25 @@ if [ -f /etc/bash_completion ]; then
     . /etc/bash_completion
 fi
 
+# Автозавершение для Rake
+# https://github.com/ai/rake-completion/blob/master/rake
+export COMP_WORDBREAKS=${COMP_WORDBREAKS/\:/}
+_rakecomplete() {
+  if [ -f Rakefile ]; then
+    recent=`ls -t tmp/aux/.rake_tasks Rakefile **/*.rake 2> /dev/null | head -n 1`
+    if [ ! -d tmp/aux ]; then
+       mkdir -p tmp/aux
+    fi
+    if [[ $recent != 'tmp/aux/.rake_tasks' ]]; then
+       rake --silent --tasks | cut -d " " -f 2 > tmp/aux/.rake_tasks
+    fi
+      COMPREPLY=($(compgen -W "`cat tmp/aux/.rake_tasks`" -- ${COMP_WORDS[COMP_CWORD]}))
+      return 0
+  fi
+}
+
+complete -o default -o nospace -F _rakecomplete rake
+
 # Пользовательские функции
 # Настолько полезная штука, что это просто не передать словами - одни эмоции
 pgrep () { ps auxww | egrep --color=always "$1" | grep -v "egrep.*$1"; }
@@ -286,3 +305,4 @@ alias ges='gem search --remote'
 # Enable Ruby Environment Manager (RVM).
 # This should be done at the end of file.
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
+
