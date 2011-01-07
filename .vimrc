@@ -25,7 +25,7 @@ set ruler            " Линейка
 set wildmenu         " Продвинутое автозавершение команд
 set visualbell       " Визуальный звонок вместо звукового
 set laststatus=2     " Всегда показывать строку статуса
-set statusline=%F\%1*%y%*%m%r:%n\ %w\%h\ %-14.18(%2*%3p%%%*\ %l/%L\:%c%)\ &#%04.4b\ &#x%04.4B\ %a
+set statusline=%F:%n%*%y%*%3.3(%m%)%r\%w\%h%-12.16(%*%3p%%%*\ %l/%L\:%c%)\ &#%04.4b\ &#x%04.4B\ %a
 set updatetime=1000  " Глобальный интервал обновления
 
 " Отключить всякого рода файлы-артефакты
@@ -115,7 +115,7 @@ imap { {}<Left>
 set langmap=ёйцукенгшщзхъфывапролджэячсмитьбюЁЙЦУКЕHГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮ;`qwertyuiop[]asdfghjkl\\;'zxcvbnm\\,.~QWERTYUIOP{}ASDFGHJKL:\\"ZXCVBNM<>
 
 " Сброс подсветки результатов поиска
-map <silent> <Leader>ts :set hlsearch!<CR>
+map <silent> <Esc>h :set hlsearch!<CR>
 
 " Управление табами
 nmap <F5> :tabprevious<CR>
@@ -130,7 +130,7 @@ let Tlist_Auto_Open=0
 let Tlist_Auto_Update=1
 let Tlist_Highlight_Tag_On_BufEnter=1
 let Tlist_Compact_Format=1
-let Tlist_Close_On_Select=1
+let Tlist_Close_On_Select=0
 let Tlist_Exit_OnlyWindow=1
 let Tlist_GainFocus_On_ToggleOpen=1
 let Tlist_WinWidth=24
@@ -145,3 +145,10 @@ let NERDTreeQuitOnOpen=1
 let NERDTreeWinPos='left'
 let NERDTreeWinSize=24
 let NERDTreeChDirMode=2
+
+" Syntastic
+let g:syntastic_auto_loc_list=1
+let g:syntastic_quiet_warnings=1
+set statusline+=\ %#warningmsg# 
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
