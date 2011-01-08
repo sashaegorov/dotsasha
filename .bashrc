@@ -162,6 +162,9 @@ if [ -x /usr/bin/dircolors ]; then
     alias egrep='egrep --color=auto'
 fi
 
+# Ну это тоже надо куда-то деть...
+alias su='sudo su'
+
 # Алиасы для VIM
 alias vi='vim'
 alias vim='vim -p'
