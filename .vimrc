@@ -146,6 +146,9 @@ let NERDTreeWinPos='left'
 let NERDTreeWinSize=24
 let NERDTreeChDirMode=2
 
+" Настройка NERDCommenter
+let g:NERDSpaceDelims=1
+
 " Syntastic
 let g:syntastic_auto_loc_list=1
 let g:syntastic_quiet_warnings=1
