@@ -307,9 +307,28 @@ alias rksp='rake spec'
 alias gits='git status'
 alias gitd='git diff'
 alias gitc='git commit'
-alias gita='git add --interactive'
+alias gita='git add'
+alias gitai='git add --interactive'
 alias giti='git instaweb'
 alias gitl='git log'
+# Не знаю, как сделать так, чтобы Git показывал
+# неотслеживаемые файлы, а не только каталоги. :-p
+# Вывод неотслеживаемых файлов
+function gitu () {
+  local UNTRACKED
+  for UNTRACKED in `git status -s | awk '{print $2}'`; do
+    if [ -d ${UNTRACKED} ]; then
+      git status -s ${UNTRACKED};
+    fi;
+  done
+}
+# Удаление неотслеживаемых файлов
+function gitud () {
+  local UNTRACKED_FILE
+  for UNTRACKED_FILE in `gitu`; do
+    rm -i ${UNTRACKED_FILE};
+  done
+}
 
 # Полезные алиасы для перезапуска служб
 alias ngs='sudo /etc/init.d/nginx status'
