@@ -141,7 +141,7 @@ map <silent> <F10> :NERDTreeToggle<CR>
 imap <silent> <F10> <Esc>:NERDTreeToggle<CR>
 let NERDTreeShowHidden=1
 let NERDChristmasTree=1
-let NERDTreeQuitOnOpen=1
+let NERDTreeQuitOnOpen=0
 let NERDTreeWinPos='left'
 let NERDTreeWinSize=24
 let NERDTreeChDirMode=2
