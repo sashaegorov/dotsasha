@@ -213,7 +213,7 @@ _rakecomplete() {
   fi
 }
 
-bash < <( curl http://rvm.beginrescueend.com/releases/rvm-install-head )
+complete -o default -o nospace -F _rakecomplete rake
 
 # TODO:
 # Нечто похожее можно сделать для gem
