@@ -79,21 +79,21 @@ export BCGC="\033[46m"
 export BCGW="\033[47m"
 
 # Вывод определённого цвета, если текущий каталог доступен пользователю на запись.
-function colpwd() {
-    if [ -w ${PWD} ]; then
-        echo -en ${COLW}
-    else
-        echo -en ${BLDR}
-    fi
+colpwd() {
+  if [ -w ${PWD} ]; then
+    echo -en ${COLW}
+  else
+    echo -en ${BLDR}
+  fi
 }
 
 # Вывод root более заметным образом.
-function coluser() {
-    if [ $UID -eq 0 ]; then
-        echo -en ${BLDR}
-    else
-        echo -en ${BLDW}
-    fi
+coluser() {
+  if [ $UID -eq 0 ]; then
+    echo -en ${BLDR}
+  else
+    echo -en ${BLDW}
+  fi
 }
 
 # set a fancy prompt (non-color, unless we know we "want" color)
@@ -107,39 +107,39 @@ esac
 #force_color_prompt=yes
 
 if [ -n "$force_color_prompt" ]; then
-    if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
-        # We have color support; assume it's compliant with Ecma-48
-        # (ISO/IEC-6429). (Lack of such support is extremely rare, and such
-        # a case would tend to support setf rather than setaf.)
-        color_prompt=yes
-    else
-        color_prompt=
-    fi
+  if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
+    # We have color support; assume it's compliant with Ecma-48
+    # (ISO/IEC-6429). (Lack of such support is extremely rare, and such
+    # a case would tend to support setf rather than setaf.)
+    color_prompt=yes
+  else
+    color_prompt=
+  fi
 fi
 
 if [ "$color_prompt" = yes ]; then
-    # Оригинальное приглашение
-    # PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
-    # Управляющие последовательности всегда следует отбивать с помощью \[...\],
-    # чтобы не поломать приглашение при возврате длинных команд.
-    # Вызов функций или команд не редко должен осуществляться в \$(...),
-    # чтобы изменяемые значения изменялись в самом приглашении.
-    # Эталонный рабочий вариант где ничего не поломано:,
-    # PS1="\[\$(coluser)\]\u\[${COLD}\]@\h:\[\$(colpwd)\]\w\[${COLD}\]\\$ "
-    PS1="\[\$(coluser)\]\u\[$COLD\]@\h:\[\$(colpwd)\]\w\[$COLD\]\\$ "
+  # Оригинальное приглашение
+  # PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+  # Управляющие последовательности всегда следует отбивать с помощью \[...\],
+  # чтобы не поломать приглашение при возврате длинных команд.
+  # Вызов функций или команд не редко должен осуществляться в \$(...),
+  # чтобы изменяемые значения изменялись в самом приглашении.
+  # Эталонный рабочий вариант где ничего не поломано:,
+  # PS1="\[\$(coluser)\]\u\[${COLD}\]@\h:\[\$(colpwd)\]\w\[${COLD}\]\\$ "
+  PS1="\[\$(coluser)\]\u\[$COLD\]@\h:\[\$(colpwd)\]\w\[$COLD\]\\$ "
 else
-    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
+  PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
 fi
 unset color_prompt force_color_prompt
 
 # Для терминалов, поддерживающих эту возможность, можно установить заголовок окна/вкладки
 case "$TERM" in
-xterm*|rxvt*)
+  xterm*|rxvt*)
     # Оригинальное приглашение
     # PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
     PS1="\[\e]0;\u@\h:\w\a\]$PS1"
     ;;
-*)
+  *)
     ;;
 esac
 
@@ -154,14 +154,14 @@ esac
 
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
-    eval "`dircolors -b`"
-    alias ls='ls --color=auto'
-    alias dir='dir --color=auto'
-    alias vdir='vdir --color=auto'
+  eval "`dircolors -b`"
+  alias ls='ls --color=auto'
+  alias dir='dir --color=auto'
+  alias vdir='vdir --color=auto'
 
-    alias grep='grep --color=auto'
-    alias fgrep='fgrep --color=auto'
-    alias egrep='egrep --color=auto'
+  alias grep='grep --color=auto'
+  alias fgrep='fgrep --color=auto'
+  alias egrep='egrep --color=auto'
 fi
 
 # Ну это тоже надо куда-то деть...
@@ -193,7 +193,7 @@ alias mv='mv -i'
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
 # sources /etc/bash.bashrc).
 if [ -f /etc/bash_completion ]; then
-    . /etc/bash_completion
+  . /etc/bash_completion
 fi
 
 # Автозавершение для Rake
@@ -203,13 +203,13 @@ _rakecomplete() {
   if [ -f Rakefile ]; then
     recent=`ls -t tmp/aux/.rake_tasks Rakefile **/*.rake 2> /dev/null | head -n 1`
     if [ ! -d tmp/aux ]; then
-       mkdir -p tmp/aux
+      mkdir -p tmp/aux
     fi
     if [[ $recent != 'tmp/aux/.rake_tasks' ]]; then
-       rake --silent --tasks | cut -d " " -f 2 > tmp/aux/.rake_tasks
+      rake --silent --tasks | cut -d " " -f 2 > tmp/aux/.rake_tasks
     fi
-      COMPREPLY=($(compgen -W "`cat tmp/aux/.rake_tasks`" -- ${COMP_WORDS[COMP_CWORD]}))
-      return 0
+    COMPREPLY=($(compgen -W "`cat tmp/aux/.rake_tasks`" -- ${COMP_WORDS[COMP_CWORD]}))
+    return 0
   fi
 }
 
@@ -323,7 +323,7 @@ alias gitl='git log'
 # Не знаю, как сделать так, чтобы Git показывал
 # неотслеживаемые файлы, а не только каталоги. :-p
 # Вывод неотслеживаемых файлов
-function gitu () {
+gitu () {
   local UNTRACKED
   for UNTRACKED in `git status -s | awk '{print $2}'`; do
     if [ -d ${UNTRACKED} ]; then
@@ -332,7 +332,7 @@ function gitu () {
   done
 }
 # Удаление неотслеживаемых файлов
-function gitud () {
+gitud () {
   local UNTRACKED_FILE
   for UNTRACKED_FILE in `gitu`; do
     rm -i ${UNTRACKED_FILE};
