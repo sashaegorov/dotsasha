@@ -30,7 +30,9 @@ shopt -s histappend
 shopt -s checkwinsize
 
 # Важные переменные окружения
-export EDITOR='vi'
+# Важно vim, а не vi
+export EDITOR='vim'
+export RUBYOPT=''
 
 # make less more friendly for non-text input files, see lesspipe(1)
 #[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
@@ -96,7 +98,7 @@ function coluser() {
 
 # set a fancy prompt (non-color, unless we know we "want" color)
 case "$TERM" in
-    xterm-color) color_prompt=yes;;
+    xterm) color_prompt=yes;;
 esac
 
 # uncomment for a colored prompt, if the terminal has the capability; turned
@@ -211,7 +213,14 @@ _rakecomplete() {
   fi
 }
 
-complete -o default -o nospace -F _rakecomplete rake
+bash < <( curl http://rvm.beginrescueend.com/releases/rvm-install-head )
+
+# TODO:
+# Нечто похожее можно сделать для gem
+# gem help commands | egrep "^ " | awk '{print $1}'
+# Кешировать надо в ~/.bashcomplete/KEY
+# где, KEY это что-то вроде:
+# pwd | md5sum | awk '{print $1}'
 
 # Пользовательские функции
 # Настолько полезная штука, что это просто не передать словами - одни эмоции
