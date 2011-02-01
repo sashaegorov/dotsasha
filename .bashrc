@@ -267,6 +267,15 @@ color16 () {
   echo
 }
 
+# А вот не надо расслабляться...
+genpass () {
+  local l=$1
+  for i in {1..5}; do
+    [ "$l" == "" ] && l=16
+    tr -cd 'A-Za-z0-9_#!$%^&*' < /dev/urandom | head -c ${l} | xargs echo
+  done
+} 
+
 # Алаисы для Rails 2/3
 # http://matthewhutchinson.net/2010/9/19/rails-3-bash-aliases-and-irbrc-configs
 alias r='rails'
