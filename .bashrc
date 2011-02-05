@@ -188,6 +188,19 @@ alias ...='cd ../..'
 alias cp='cp -i'
 alias mv='mv -i'
 
+# Перезапуск "служб".
+# Nginx
+alias ngr='sudo /etc/init.d/nginx restart'
+alias ngk='sudo /etc/init.d/nginx stop'
+# PostgreSQL
+alias pgr='sudo /etc/init.d/postgresql restart'
+alias pgk='sudo /etc/init.d/postgresql stop'
+# Apache2
+alias apr='sudo /etc/init.d/apache2 restart'
+alias apk='sudo /etc/init.d/apache2 stop'
+# MySQL
+alias myr='sudo /etc/init.d/mysql restart'
+alias myk='sudo /etc/init.d/mysql stop'
 
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
