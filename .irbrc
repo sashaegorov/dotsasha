@@ -1,3 +1,5 @@
+require 'rubygems'
+
 IRB.conf[:PROMPT_MODE] = :DEFAULT
 
 begin # Interactive editor
@@ -34,7 +36,7 @@ begin # Hirb
 end
 
 # -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
-require 'rdoc/ri/driver'
+# require 'rdoc/ri/driver'
 # -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
 alias q exit
