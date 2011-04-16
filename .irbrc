@@ -17,7 +17,7 @@ begin # Wirble
 end
 
 begin # Looksee
-  require 'looksee/shortcuts'
+  require 'looksee'
   rescue LoadError => error
     $stderr.puts "Couldn't load Looksee: #{error}"
 end

@@ -99,15 +99,25 @@ coluser() {
 }
 
 # Вывод текущей ветки разработки для GIT
-colgitbranch() {
+colgit() {
+  local GITBRANCH=`git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'`
+  if [ -z ${GITBRANCH} ]; then
+    return
+  else
+    echo -en ${BLDM}
+  fi
+}
+
+gitbranch() {
   local GITBRANCH=`git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'`
   if [ -z ${GITBRANCH} ]; then
     return
   elif [ ${GITBRANCH} = 'master' ]; then
-    echo -en ${BLDM}/
+    echo -n "/"
   else
-    echo -en ${BLDM}/${GITBRANCH}
+    echo -n "/${GITBRANCH}"
   fi
+
 }
 
 # set a fancy prompt (non-color, unless we know we "want" color)
@@ -136,12 +146,14 @@ if [ "$color_prompt" = yes ]; then
   # PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
   # Управляющие последовательности всегда следует отбивать с помощью \[...\],
   # чтобы не поломать приглашение при возврате длинных команд.
+  # Необходимо особо отметить, что между \[...\]
+  # должна быть только управляющая последовательность.
   # Вызов функций или команд не редко должен осуществляться в \$(...),
   # чтобы изменяемые значения изменялись в самом приглашении.
   # Эталонный рабочий вариант где ничего не поломано:,
   # PS1="\[\$(coluser)\]\u\[${COLD}\]@\h:\[\$(colpwd)\]\w\[${COLD}\]\\$ "
-  # PS1="\[\$(coluser)\]\u\[$COLD\]@\h:\[\$(colpwd)\]\w\[$COLD\]\\$ "dd
-  PS1="\[\$(coluser)\]\u\[$COLD\]@\h:\[\$(colpwd)\]\w\[\$(colgitbranch)\]\[$COLD\]\\$ "
+  # PS1="\[\$(coluser)\]\u\[$COLD\]@\h:\[\$(colpwd)\]\w\[$COLD\]\\$ "
+  PS1="\[\$(coluser)\]\u\[$COLD\]@\h:\[\$(colpwd)\]\w\[\$(colgit)\]\$(gitbranch)\[$COLD\]\\$ "
 else
   PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
 fi
