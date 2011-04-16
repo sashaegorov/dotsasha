@@ -89,10 +89,24 @@ colpwd() {
 
 # Вывод root более заметным образом.
 coluser() {
-  if [ $UID -eq 0 ]; then
+  if [ $USER = 'root' ]; then
     echo -en ${BLDR}
+  elif [ $USER = 'postgres' ]; then
+    echo -en ${BLDG}
   else
     echo -en ${BLDW}
+  fi
+}
+
+# Вывод текущей ветки разработки для GIT
+colgitbranch() {
+  local GITBRANCH=`git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'`
+  if [ -z ${GITBRANCH} ]; then
+    return
+  elif [ ${GITBRANCH} = 'master' ]; then
+    echo -en ${BLDM}/
+  else
+    echo -en ${BLDM}/${GITBRANCH}
   fi
 }
 
@@ -126,7 +140,8 @@ if [ "$color_prompt" = yes ]; then
   # чтобы изменяемые значения изменялись в самом приглашении.
   # Эталонный рабочий вариант где ничего не поломано:,
   # PS1="\[\$(coluser)\]\u\[${COLD}\]@\h:\[\$(colpwd)\]\w\[${COLD}\]\\$ "
-  PS1="\[\$(coluser)\]\u\[$COLD\]@\h:\[\$(colpwd)\]\w\[$COLD\]\\$ "
+  # PS1="\[\$(coluser)\]\u\[$COLD\]@\h:\[\$(colpwd)\]\w\[$COLD\]\\$ "dd
+  PS1="\[\$(coluser)\]\u\[$COLD\]@\h:\[\$(colpwd)\]\w\[\$(colgitbranch)\]\[$COLD\]\\$ "
 else
   PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
 fi
@@ -237,7 +252,7 @@ complete -o default -o nospace -F _rakecomplete rake
 
 # Пользовательские функции
 # Настолько полезная штука, что это просто не передать словами - одни эмоции
-pgrep () { ps auxww | egrep --color=always "$1" | grep -v "egrep.*$1"; }
+psgrep () { ps auxww | egrep --color=always "$1" | grep -v "egrep.*$1"; }
 
 # Создать каталог и перейти в него
 md () { mkdir -p "$1" && cd "$1"; }
@@ -342,6 +357,7 @@ alias gita='git add'
 alias gitai='git add --interactive'
 alias giti='git instaweb'
 alias gitl='git log'
+alias gitck='git checkout'
 # Не знаю, как сделать так, чтобы Git показывал
 # неотслеживаемые файлы, а не только каталоги. :-p
 # Вывод неотслеживаемых файлов

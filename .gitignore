@@ -4,3 +4,5 @@
 .vim/ruby/command-t
 .vim/.VimballRecord
 .vim/.netrwhist
+# Всё это пришло с snipMate
+.vim/snippets
