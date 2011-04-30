@@ -117,6 +117,11 @@ set langmap=ёйцукенгшщзхъфывапролджэячсмитьбюЁ
 " Сброс подсветки результатов поиска
 map <silent> <Esc>h :set hlsearch!<CR>
 
+" Простые и удобные выход и сохранение
+map <silent> <Esc>q :q<CR>
+map <silent> <Esc>w :w<CR>
+map <silent> <Esc>wq :wq<CR>
+
 " Управление табами
 nmap <F5> :tabprevious<CR>
 imap <F5> <Esc>:tabprevious<CR>i<Right>
@@ -155,6 +160,9 @@ let g:syntastic_quiet_warnings=1
 set statusline+=\ %#warningmsg# 
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
+
+" Настройка 
+let g:ConqueTerm_ReadUnfocused = 1
 
 " Ремонт нумпада
 inoremap <Esc>Oq 1

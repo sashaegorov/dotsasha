@@ -412,5 +412,6 @@ alias ges='gem search --remote'
 
 # Enable Ruby Environment Manager (RVM).
 # This should be done at the end of file.
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
+[[ -s $HOME/.rvm/scripts/rvm ]] && . $HOME/.rvm/scripts/rvm
+[[ -r $rvm_path/scripts/completion ]] && . $rvm_path/scripts/completion
 
