@@ -114,6 +114,12 @@ let g:CommandTScanDotDirectories=1             " Сканировать дот-�
 " это пожалуй самое главное:
 set langmap=ёйцукенгшщзхъфывапролджэячсмитьбюЁЙЦУКЕHГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮ;`qwertyuiop[]asdfghjkl\\;'zxcvbnm\\,.~QWERTYUIOP{}ASDFGHJKL:\\"ZXCVBNM<>
 
+" Режим вставки  
+nmap <Leader>p :set paste!<CR>i<Right>
+
+" Режим подсветки неаидимого
+nmap <Leader>l :set list!<CR>i<Right>
+
 " Сброс подсветки результатов поиска
 map <silent> <Esc>h :set hlsearch!<CR>
 
@@ -127,6 +133,9 @@ nmap <F5> :tabprevious<CR>
 imap <F5> <Esc>:tabprevious<CR>i<Right>
 nmap <F6> :tabnext<CR>
 imap <F6> <Esc>:tabnext<CR>i<Right>
+
+nmap <A-F5> :bp<CR>
+nmap <A-F6> :bn<CR>
 
 " Настройка Tlist
 map <silent> <F9> :TlistToggle<CR>
