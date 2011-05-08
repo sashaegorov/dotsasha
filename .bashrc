@@ -5,10 +5,12 @@
 [ -z "$PS1" ] && return
 
 # Переменная окружения PATH
-# Собственная сборка VIM 7.3 
-export PATH=/opt/vim73/bin:$PATH
+# Vim 7.3 
+export PATH=$PATH:/opt/vim73/bin
 # Erlang Erlang R14B01
-export PATH=/opt/erl14/bin:$PATH
+export PATH=$PATH:/opt/erl14/bin
+# Redis 2.2.6
+export PATH=$PATH:/opt/redis22
 
 # Настройка истории команд
 # Убивать дубликаты истории самым жестоким образом
@@ -196,7 +198,6 @@ alias su='sudo su'
 
 # Алиасы для VIM
 alias vi='vim'
-alias vim='vim -p'
 
 # Некоторые полезные алиасы
 # `ls' and it's options
@@ -362,13 +363,17 @@ alias rkdbm='rake db:migrate'
 alias rksp='rake spec'
 
 # Полезные алиасы для Git
-alias gits='git status'
+alias gits='git status --short'
+alias gitss='git status'
 alias gitd='git diff'
+alias gitdc='git diff --cached'
 alias gitc='git commit'
 alias gita='git add'
 alias gitai='git add --interactive'
 alias giti='git instaweb'
 alias gitl='git log'
+alias gitlo='git log --oneline'
+alias gitla='git log --pretty --stat HEAD^..HEAD'
 alias gitck='git checkout'
 # Не знаю, как сделать так, чтобы Git показывал
 # неотслеживаемые файлы, а не только каталоги. :-p
