@@ -11,6 +11,9 @@ export PATH=$PATH:/opt/vim73/bin
 export PATH=$PATH:/opt/erl14/bin
 # Redis 2.2.6
 export PATH=$PATH:/opt/redis22
+# JDK 1.6
+export PATH=$PATH:/opt/jdk16/bin
+export JAVA_HOME=/opt/jdk16
 
 # Настройка истории команд
 # Убивать дубликаты истории самым жестоким образом

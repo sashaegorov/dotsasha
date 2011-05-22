@@ -132,13 +132,10 @@ map <silent> <Esc>w :w<CR>
 map <silent> <Esc>wq :wq<CR>
 
 " Управление табами
-nmap <F5> :tabprevious<CR>
-imap <F5> <Esc>:tabprevious<CR>i<Right>
-nmap <F6> :tabnext<CR>
-imap <F6> <Esc>:tabnext<CR>i<Right>
-
-nmap <A-F5> :bp<CR>
-nmap <A-F6> :bn<CR>
+nmap <F5> :bprevious<CR>
+imap <F5> <Esc>:bprevious<CR>i<Right>
+nmap <F6> :bnext<CR>
+imap <F6> <Esc>:bnext<CR>i<Right>
 
 " Настройка Tlist
 map <silent> <F9> :TlistToggle<CR>
