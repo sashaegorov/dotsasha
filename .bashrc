@@ -14,6 +14,8 @@ export PATH=$PATH:/opt/redis22
 # JDK 1.6
 export PATH=$PATH:/opt/jdk16/bin
 export JAVA_HOME=/opt/jdk16
+# Node JS
+export PATH=$PATH:/opt/nodejs/bin
 
 # Настройка истории команд
 # Убивать дубликаты истории самым жестоким образом
@@ -405,8 +407,8 @@ alias ngr='sudo /etc/init.d/nginx restart'
 alias rvi='rvm info ruby,homes'
 alias rvl='rvm list'
 alias rvlk='rvm list known'
-alias rvg='rvm use 1.9.2@global'
-alias rvr='rvm use 1.9.2@rails3'
+alias rvg='rvm use 1.9.3-p0@global'
+alias rvr='rvm use 1.9.3-p0@rails3'
 alias rvgl='rvm gemset list'
 alias rvgd='rvm gemset gemdir'
 
