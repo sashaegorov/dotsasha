@@ -10,7 +10,7 @@ export PATH=$PATH:/opt/vim73/bin
 # Erlang Erlang R14B01
 export PATH=$PATH:/opt/erl14/bin
 # Redis 2.2.6
-export PATH=$PATH:/opt/redis22
+export PATH=$PATH:/opt/redis24
 # JDK 1.6
 export PATH=$PATH:/opt/jdk16/bin
 export JAVA_HOME=/opt/jdk16

@@ -90,17 +90,15 @@ nmap <F7> :set spell!<CR>
 map <Leader>za :emenu Spell.<TAB>
 
 " Minibuffer Explorer Settings
-map <Leader>tt :TMiniBufExplorer<CR>
-let g:miniBufExplMapWindowNavVim = 1
-let g:miniBufExplMapWindowNavArrows = 1
-let g:miniBufExplMapCTabSwitchBufs = 1
+map <Leader>t :TMiniBufExplorer<CR>
+let g:miniBufExplUseSingleClick = 1
 let g:miniBufExplModSelTarget = 1
+let g:miniBufExplorerAutoUpdate = 1
 
 " Настройка Command-T
 " Открывать по Ctrl-T и сразу чистить:
 map <C-t> :CommandT<CR><Tab><C-u><Tab>
 imap <C-t> <Esc>:CommandT<CR><Tab><C-u><Tab>
-nmap <silent> <Leader>t :CommandT<CR><Tab><C-u><Tab>
 let g:CommandTCancelMap=['<C-t>']     " ...и закрывать также
 let g:CommandTAcceptSelectionTabMap=['<CR>']  " Всё открываемые файлы по умолчанию открывать в табах
 let g:CommandTMaxHeight=20                     " Максимальная высота окна
@@ -132,10 +130,10 @@ map <silent> <Esc>w :w<CR>
 map <silent> <Esc>wq :wq<CR>
 
 " Управление табами
-nmap <F5> :bprevious<CR>
-imap <F5> <Esc>:bprevious<CR>i<Right>
-nmap <F6> :bnext<CR>
-imap <F6> <Esc>:bnext<CR>i<Right>
+nmap <F5> :bprevious!<CR>
+imap <F5> <Esc>:bprevious!<CR>i<Right>
+nmap <F6> :bnext!<CR>
+imap <F6> <Esc>:bnext!<CR>i<Right>
 
 " Настройка Tlist
 map <silent> <F9> :TlistToggle<CR>
