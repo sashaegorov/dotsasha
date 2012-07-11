@@ -129,7 +129,7 @@ gitbranch() {
 
 # set a fancy prompt (non-color, unless we know we "want" color)
 case "$TERM" in
-    xterm) color_prompt=yes;;
+    xterm*) color_prompt=yes;;
 esac
 
 # uncomment for a colored prompt, if the terminal has the capability; turned
@@ -421,7 +421,14 @@ alias geus='gem update --system'
 alias ges='gem search --remote'
 
 # Enable Ruby Environment Manager (RVM).
+# Add RVM to PATH for scriptirg
+PATH=$PATH:$HOME/.rvm/bin
 # This should be done at the end of file.
 [[ -s $HOME/.rvm/scripts/rvm ]] && . $HOME/.rvm/scripts/rvm
 [[ -r $rvm_path/scripts/completion ]] && . $rvm_path/scripts/completion
 
+# Minimally Awesome Todos
+# http://blog.jerodsanto.net/2010/12/minimally-awesome-todos/
+export TODO=~/Documents/todo
+function todo() { if [ $# == "0" ]; then cat $TODO; else echo "$@" >> $TODO; fi }
+function todone() { sed -i -e "/$*/d" $TODO; }
