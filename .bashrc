@@ -3,6 +3,12 @@
 # На Mac может потребоваться добавить
 # ln -s .bashrc .bash_profile
 
+# Автозавершения комманд Bash
+# Необходим `brew install bash-completion`
+if [ -f /usr/local/etc/bash_completion ]; then
+. /usr/local/etc/bash_completion
+fi
+
 # Если сеанс не интерактивный, ничего не делаем
 [ -z "$PS1" ] && return
 
@@ -131,26 +137,26 @@ gitbranch() {
 
 # set a fancy prompt (non-color, unless we know we "want" color)
 case "$TERM" in
-    xterm*) color_prompt=yes;;
+    xterm*) COLOR_TERM=yes;;
 esac
 
 # uncomment for a colored prompt, if the terminal has the capability; turned
 # off by default to not distract the user: the focus in a terminal window
 # should be on the output of commands, not on the prompt
-#force_color_prompt=yes
+#FORCE_COLOR_TERM=yes
 
-if [ -n "$force_color_prompt" ]; then
+if [ -n "$FORCE_COLOR_TERM" ]; then
   if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
     # We have color support; assume it's compliant with Ecma-48
     # (ISO/IEC-6429). (Lack of such support is extremely rare, and such
     # a case would tend to support setf rather than setaf.)
-    color_prompt=yes
+    COLOR_TERM=yes
   else
-    color_prompt=
+    COLOR_TERM=
   fi
 fi
 
-if [ "$color_prompt" = yes ]; then
+if [ "$COLOR_TERM" = yes ]; then
   # Оригинальное приглашение
   # PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
   # Управляющие последовательности всегда следует отбивать с помощью \[...\],
@@ -166,7 +172,6 @@ if [ "$color_prompt" = yes ]; then
 else
   PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
 fi
-unset color_prompt force_color_prompt
 
 # Для терминалов, поддерживающих эту возможность, можно установить заголовок окна/вкладки
 case "$TERM" in
@@ -188,18 +193,6 @@ esac
 #    . ~/.bash_aliases
 #fi
 
-# enable color support of ls and also add handy aliases
-if [ -x /usr/bin/dircolors ]; then
-  eval "`dircolors -b`"
-  alias ls='ls --color=auto'
-  alias dir='dir --color=auto'
-  alias vdir='vdir --color=auto'
-
-  alias grep='grep --color=auto'
-  alias fgrep='fgrep --color=auto'
-  alias egrep='egrep --color=auto'
-fi
-
 # Ну это тоже надо куда-то деть...
 alias su='sudo su'
 
@@ -207,13 +200,41 @@ alias su='sudo su'
 alias vi='vim'
 
 # Некоторые полезные алиасы
-# `ls' and it's options
-alias l='ls -U1F'       # Простой вывод одной колонкой
-alias ll='ls -lhFrt'    # Полный вывод
-alias la='ls -lUFa'     # Полный вывод всех файлов
-alias lh='ls -lUFad .*' # Полный вывод скрытых файлов
-alias lld='ls -lUd */'  # Полный вывод каталогов
-alias lsln='ls -laF --color=always | grep lrwxrwxrwx'
+# Включить условный цветной вывод для команд
+
+# Команды по умолчанию
+_LS="ls"
+_DIRCOLORS="dircolors"
+
+# Необхомо для Mac с установленными coreutils
+if [ `uname`=="Darvin" ]; then
+  [ -x /usr/local/bin/gls ] && _LS="gls"
+  [ -x /usr/local/bin/gdircolors ] && _DIRCOLORS="gdircolors"
+fi
+
+if [ -x `which ${_DIRCOLORS}` ]; then
+  eval "`${_DIRCOLORS} -b`"
+fi
+
+if [ "$COLOR_TERM" = yes ]; then
+  # До определить аргументы ls
+  # TODO А что если gls отсутствует?
+  _LS="${_LS} --color=auto"
+  alias ls="${_LS}"
+  # Прочее
+  alias dir='dir --color=auto'
+  alias vdir='vdir --color=auto'
+  alias grep='grep --color=auto'
+  alias fgrep='fgrep --color=auto'
+  alias egrep='egrep --color=auto'
+fi
+
+alias l="${_LS} -U1F"       # Простой вывод одной колонкой
+alias ll="${_LS} -lhFrt"    # Полный вывод
+alias la="${_LS} -lUFa"     # Полный вывод всех файлов
+alias lh="${_LS} -lUFad .*" # Полный вывод скрытых файлов
+alias lld="${_LS} -lUd */"  # Полный вывод каталогов
+alias lsln="${_LS} -laF --color=always | grep lrwxrwxrwx"
 
 # Навигация по каталогам
 alias ..='cd ..'
