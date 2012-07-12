@@ -303,38 +303,6 @@ alias rkdbm='rake db:migrate'
 # Тесты
 alias rksp='rake spec'
 
-# Полезные алиасы для Git
-alias gits='git status --short'
-alias gitss='git status'
-alias gitd='git diff'
-alias gitdc='git diff --cached'
-alias gitc='git commit'
-alias gita='git add'
-alias gitai='git add --interactive'
-alias giti='git instaweb'
-alias gitl='git log'
-alias gitlo='git log --oneline'
-alias gitla='git log --pretty --stat HEAD^..HEAD'
-alias gitck='git checkout'
-# Не знаю, как сделать так, чтобы Git показывал
-# неотслеживаемые файлы, а не только каталоги. :-p
-# Вывод неотслеживаемых файлов
-gitu () {
-  local UNTRACKED
-  for UNTRACKED in `git status -s | awk '{print $2}'`; do
-    if [ -d ${UNTRACKED} ]; then
-      git status -s ${UNTRACKED};
-    fi;
-  done
-}
-# Удаление неотслеживаемых файлов
-gitud () {
-  local UNTRACKED_FILE
-  for UNTRACKED_FILE in `gitu`; do
-    rm -i ${UNTRACKED_FILE};
-  done
-}
-
 # Полезные алиасы для перезапуска служб
 alias ngs='sudo /etc/init.d/nginx status'
 alias ngr='sudo /etc/init.d/nginx restart'
