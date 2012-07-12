@@ -21,8 +21,12 @@ REAL_DIR="$( cd -P "$( dirname "$__SOURCE" )" && pwd )"
 
 # Автозавершения комманд Bash
 # Необходим `brew install bash-completion`
+# Это можно не делать, если автозавершения загружаются из /etc/
 if [ -f /usr/local/etc/bash_completion ]; then
 . /usr/local/etc/bash_completion
+fi
+if [ -f /etc/bash_completion ]; then
+  . /etc/bash_completion
 fi
 
 # Если сеанс не интерактивный, ничего не делаем
@@ -200,13 +204,6 @@ alias apk='sudo /etc/init.d/apache2 stop'
 # MySQL
 alias myr='sudo /etc/init.d/mysql restart'
 alias myk='sudo /etc/init.d/mysql stop'
-
-# enable programmable completion features (you don't need to enable
-# this, if it's already enabled in /etc/bash.bashrc and /etc/profile
-# sources /etc/bash.bashrc).
-if [ -f /etc/bash_completion ]; then
-  . /etc/bash_completion
-fi
 
 # Автозавершение для Rake
 # https://github.com/ai/rake-completion/blob/master/rake
