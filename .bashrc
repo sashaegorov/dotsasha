@@ -218,8 +218,13 @@ fi
 
 if [ "$COLOR_TERM" = yes ]; then
   # До определить аргументы ls
-  # TODO А что если gls отсутствует?
-  _LS="${_LS} --color=auto"
+  # Выбрать правильный аргумент в зависимости от ls
+  if [ `uname`=="Darvin" -a ${_LS} = "ls" ]; then
+    _LS="${_LS} -G"
+  else
+    _LS="${_LS} --color=auto"
+  fi
+	
   alias ls="${_LS}"
   # Прочее
   alias dir='dir --color=auto'
@@ -338,6 +343,7 @@ color16 () {
 
 # А вот не надо расслабляться...
 genpass () {
+  # FIXME Broken on Mac's `tr`
   local l=$1
   for i in {1..5}; do
     [ "$l" == "" ] && l=16
