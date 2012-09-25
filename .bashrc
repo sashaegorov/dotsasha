@@ -17,8 +17,9 @@ done
 REAL_DIR="$( cd -P "$( dirname "$__SOURCE" )" && pwd )"
 
 # Подгрузка всякого полезного
-. $REAL_DIR/colors.sh      # Определение цветов
-. $REAL_DIR/aliases.sh      # Алиасы
+. $REAL_DIR/colors.sh     # Определение цветов
+. $REAL_DIR/aliases.sh    # Алиасы
+. $REAL_DIR/services.sh   # Сервисы
 
 # Автозавершения комманд Bash
 # Необходим `brew install bash-completion`
@@ -184,20 +185,6 @@ alias ...='cd ../..'
 # Обезболиватели
 alias cp='cp -i'
 alias mv='mv -i'
-
-# Перезапуск "служб".
-# Nginx
-alias ngr='sudo /etc/init.d/nginx restart'
-alias ngk='sudo /etc/init.d/nginx stop'
-# PostgreSQL
-alias pgr='sudo /etc/init.d/postgresql restart'
-alias pgk='sudo /etc/init.d/postgresql stop'
-# Apache2
-alias apr='sudo /etc/init.d/apache2 restart'
-alias apk='sudo /etc/init.d/apache2 stop'
-# MySQL
-alias myr='sudo /etc/init.d/mysql restart'
-alias myk='sudo /etc/init.d/mysql stop'
 
 # Автозавершение для Rake
 # https://github.com/ai/rake-completion/blob/master/rake
