@@ -28,6 +28,7 @@ alias gitl='git log'
 alias gitlo='git log --oneline'
 alias gitla='git log --pretty --stat HEAD^..HEAD'
 alias gitck='git checkout'
+alias gitp='git pull'
 
 # Не знаю, как сделать так, чтобы Git показывал неотслеживаемые файлы,
 # а не только каталоги. Вывод неотслеживаемых файлов

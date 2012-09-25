@@ -1,3 +1,4 @@
+#!/bin/bash -x
 # Файл пользовательских настроек ~/.bashrc
 # Исполняется bash(1) для интерактивных сеансов.
 # На Mac может потребоваться добавить
@@ -28,22 +29,15 @@ fi
 if [ -f /etc/bash_completion ]; then
   . /etc/bash_completion
 fi
+if [ -x /usr/local/bin/brew ]; then
+  source `brew --prefix`/Library/Contributions/brew_bash_completion.sh
+fi
 
 # Если сеанс не интерактивный, ничего не делаем
-[ -z "$PS1" ] && return
+[ -z "$PS1" ] && exit
 
 # Переменная окружения PATH
-# Vim 7.3 
-export PATH=$PATH:/opt/vim73/bin
-# Erlang Erlang R14B01
-export PATH=$PATH:/opt/erl14/bin
-# Redis 2.2.6
-export PATH=$PATH:/opt/redis24
-# JDK 1.6
-export PATH=$PATH:/opt/jdk16/bin
-export JAVA_HOME=/opt/jdk16
-# Node JS
-export PATH=$PATH:/opt/nodejs/bin
+export PATH=/usr/local/bin:/usr/local/sbin:$PATH
 
 # Настройка истории команд
 # Убивать дубликаты истории самым жестоким образом
@@ -164,7 +158,7 @@ if [ "$COLOR_TERM" = yes ]; then
   if [ `uname`=="Darvin" -a ${_LS} = "ls" ]; then
     _LS="${_LS} -G"
   else
-    _LS="${_LS} --color=auto"
+    _LS="${_LS} --color=auto --group-directories-first"
   fi
 	
   alias ls="${_LS}"
@@ -251,7 +245,8 @@ genpass () {
   local l=$1
   for i in {1..5}; do
     [ "$l" == "" ] && l=16
-    tr -cd 'A-Za-z0-9_#!$%^&*' < /dev/urandom | head -c ${l} | xargs echo
+    # FIXME: gtr hardcoded
+    gtr -cd 'A-Za-z0-9_#!$%^&*' < /dev/urandom | head -c ${l} | xargs echo
   done
 } 
 
@@ -300,19 +295,9 @@ alias rkdbm='rake db:migrate'
 # Тесты
 alias rksp='rake spec'
 
-# Полезные алиасы для перезапуска служб
-alias ngs='sudo /etc/init.d/nginx status'
-alias ngr='sudo /etc/init.d/nginx restart'
-
 # Enable Ruby Environment Manager (RVM).
 # Add RVM to PATH for scriptirg
 PATH=$PATH:$HOME/.rvm/bin
 # This should be done at the end of file.
 [[ -s $HOME/.rvm/scripts/rvm ]] && . $HOME/.rvm/scripts/rvm
 [[ -r $rvm_path/scripts/completion ]] && . $rvm_path/scripts/completion
-
-# Minimally Awesome Todos
-# http://blog.jerodsanto.net/2010/12/minimally-awesome-todos/
-export TODO=~/Documents/todo
-function todo() { if [ $# == "0" ]; then cat $TODO; else echo "$@" >> $TODO; fi }
-function todone() { sed -i -e "/$*/d" $TODO; }
