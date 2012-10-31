@@ -1,11 +1,10 @@
 # Алиасы для RVM.
-alias rvi='rvm info ruby,homes'
+alias rvg='rvm use 1.9.3@global'
+alias rvr='rvm use 1.9.3@rails32'
+alias rvc='rvm current'
 alias rvl='rvm list'
 alias rvlk='rvm list known'
-alias rvg='rvm use 1.9.3-p0@global'
-alias rvr='rvm use 1.9.3-p0@rails3'
 alias rvgl='rvm gemset list'
-alias rvgd='rvm gemset gemdir'
 
 # Алиасы для RubGems
 alias gec='gem cleanup'
