@@ -288,3 +288,5 @@ PATH=$PATH:$HOME/.rvm/bin
 # This should be done at the end of file.
 [[ -s $HOME/.rvm/scripts/rvm ]] && . $HOME/.rvm/scripts/rvm
 [[ -r $rvm_path/scripts/completion ]] && . $rvm_path/scripts/completion
+
+[[ -s /Users/sashaegorov/.nvm/nvm.sh ]] && . /Users/sashaegorov/.nvm/nvm.sh # This loads NVM

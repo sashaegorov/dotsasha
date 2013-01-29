@@ -1,2 +1,5 @@
 # :verbose: :loud
-rdoc: --inline-source --line-numbers --format=html --template=hanna
+# Hanna is not used any more
+# rdoc: --inline-source --line-numbers --format=html --template=hanna
+install: --no-ri 
+update: --no-ri

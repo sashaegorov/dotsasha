@@ -1,5 +1,5 @@
 require 'rubygems'
-
+# encoding: UTF-8
 # It can be interesting to lear these files:
 #  /Users/~/.rvm/gems/ruby-1.9.3-p194/gems/wirble-0.1.3/_irbrc
 #  /Users/~/.rvm/rubies/ruby-1.9.3-p194/.irbrc
@@ -13,7 +13,7 @@ begin # Interactive editor
 end
 
 begin # Wirble
-  require 'wirble'
+ require 'wirble'
   Wirble.init
   Wirble.colorize
   rescue LoadError => error
@@ -21,7 +21,7 @@ begin # Wirble
 end
 
 begin # Looksee
-  require 'looksee'
+ require 'looksee'
   rescue LoadError => error
     $stderr.puts "Couldn't load Looksee: #{error}"
 end

@@ -6,6 +6,8 @@
 [instaweb]
 	httpd = webrick
 [core]
-	editor = vim
+  editor = mate -w
 [merge]
 	tool = vimdiff
+[push]
+	default = simple
