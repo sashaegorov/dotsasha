@@ -3,8 +3,11 @@
 
 # Linux
 if [ `uname`=="Linux" ]; then
+  alias pg_start='sudo /etc/init.d/postgresql start'
+  alias pg_stop='sudo /etc/init.d/postgresql stop'
   alias pg_restart='sudo /etc/init.d/postgresql restart'
-  alias pg_restart='sudo /etc/init.d/postgresql stop'
+  alias pg_reload='sudo /etc/init.d/postgresql reload'
+  alias pg_status='sudo /etc/init.d/postgresql status'
 fi
 
 # Mac
