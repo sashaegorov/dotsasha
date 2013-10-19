@@ -19,8 +19,10 @@ function coluser() {
 # Вывод текущей ветки разработки для GIT
 function colgit() {
   local GITBRANCH=`git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'`
-  if [ -z ${GITBRANCH} ]; then
+  if [ -z "${GITBRANCH}" ]; then
     return
+  elif [[ "${GITBRANCH}" =~ rebasing ]]; then
+    echo -en ${BLDR}
   else
     echo -en ${BLDM}
   fi
@@ -28,10 +30,12 @@ function colgit() {
 
 function gitbranch() {
   local GITBRANCH=`git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'`
-  if [ -z ${GITBRANCH} ]; then
+  if [ -z "${GITBRANCH}" ]; then
     return
-  elif [ ${GITBRANCH} = 'master' ]; then
+  elif [ "${GITBRANCH}" = 'master' ]; then
     echo -n "/"
+  elif [[ "${GITBRANCH}" =~ rebasing ]]; then
+    echo -n "/rebase!"
   else
     echo -n "/${GITBRANCH}"
   fi

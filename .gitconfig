@@ -2,7 +2,7 @@
 	email = a.a.egoroff@gmail.com
 	name = Sasha Egorov
 [color]
-	ui = auto
+	ui = always
 [instaweb]
 	httpd = webrick
 [core]
