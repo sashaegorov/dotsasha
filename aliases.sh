@@ -1,6 +1,6 @@
 # Алиасы для RVM.
-alias rvg='rvm use 1.9.3@global'
-alias rvr='rvm use 1.9.3@rails4'
+alias rvg='rvm use ruby-1.9.3-p448@global'
+alias rvr='rvm use ruby-1.9.3-p448@rails4'
 alias rvc='rvm current'
 alias rvl='rvm list'
 alias rvlk='rvm list known'
