@@ -283,10 +283,6 @@ alias rkdbm='rake db:migrate'
 alias rksp='rake spec'
 
 # Enable Ruby Environment Manager (RVM).
-# Add RVM to PATH for scriptirg
-PATH=$PATH:$HOME/.rvm/bin
 # This should be done at the end of file.
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 [[ -r $rvm_path/scripts/completion ]] && . $rvm_path/scripts/completion
-
-[[ -s /Users/sashaegorov/.nvm/nvm.sh ]] && . /Users/sashaegorov/.nvm/nvm.sh # This loads NVM
