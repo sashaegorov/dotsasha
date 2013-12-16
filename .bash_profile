@@ -286,3 +286,6 @@ alias rksp='rake spec'
 # This should be done at the end of file.
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 [[ -r $rvm_path/scripts/completion ]] && . $rvm_path/scripts/completion
+
+# This loads NVM
+[[ -s "$HOME/.nvm/nvm.sh" ]] && . /Users/sashaegorov/.nvm/nvm.sh 
