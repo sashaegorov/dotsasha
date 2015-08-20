@@ -1,8 +1,1 @@
-.vim/doc/tags
-.vim/spell
-# Всё это пришлo c Command-T
-.vim/ruby/command-t
-.vim/.VimballRecord
-.vim/.netrwhist
-# Всё это пришло с snipMate
-.vim/snippets
+.DS_Store
