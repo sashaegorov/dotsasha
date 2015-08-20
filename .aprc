@@ -1,0 +1,5 @@
+# https://github.com/michaeldv/awesome_print#setting-custom-defaults
+AwesomePrint.defaults = {
+  :raw => true,
+  :indent => 2
+}
