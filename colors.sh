@@ -1,24 +1,22 @@
 # Вывод определённого цвета, если текущий каталог доступен пользователю на запись.
 function colpwd() {
   if [ -w "${PWD}" ]; then
-    echo -en ${COLW}
+    echo -en ${COLK}
   else
-    echo -en ${BLDR}
+    echo -en ${COLR}
   fi
 }
 # Вывод root более заметным образом.
 function coluser() {
   if [ $USER = 'root' ]; then
     echo -en ${BLDR}
-  elif [ $USER = 'postgres' ]; then
-    echo -en ${BLDG}
   else
     echo -en ${BLDW}
   fi
 }
 # Вывод текущей ветки разработки для GIT
 function colgit() {
-  local GITBRANCH=`git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'`
+  local GITBRANCH=`git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/' -e 's/[\(\)]//g' -e 's/HEAD detached at //'`
   if [ -z "${GITBRANCH}" ]; then
     return
   elif [[ "${GITBRANCH}" =~ rebasing ]]; then
@@ -29,15 +27,43 @@ function colgit() {
 }
 
 function gitbranch() {
-  local GITBRANCH=`git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'`
+  local GITBRANCH=`git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/' -e 's/[\(\)]//g' -e 's/HEAD detached at //'`
   if [ -z "${GITBRANCH}" ]; then
     return
   elif [ "${GITBRANCH}" = 'master' ]; then
     echo -n "/"
   elif [[ "${GITBRANCH}" =~ rebasing ]]; then
-    echo -n "/rebase!"
+    echo -n "◆"
   else
     echo -n "/${GITBRANCH}"
+  fi
+}
+
+# Git status functions
+# Inspired by
+# https://coderwall.com/p/pn8f0g/show-your-git-status-and-branch-in-color-at-the-command-prompt
+function gitstatuscol() {
+  local status="$(git status 2> /dev/null)"
+  if [[ $status =~ "Your branch is ahead of" ]]; then
+    echo -en "${COLY}"
+  elif [[ $status =~ "Changes to be committed" ]]; then
+    echo -en "${COLY}"
+  elif [[ $status =~ "Changes not staged for commit" ]]; then
+    echo -en "${COLR}"
+  elif [[ $status =~ "nothing to commit, working directory clean" ]]; then
+    echo -en "${COLG}"
+  fi
+}
+function gitstatussign() {
+  local status="$(git status 2> /dev/null)"
+  if [[ $status =~ "Your branch is ahead of" ]]; then
+    echo -n "❉"
+  elif [[ $status =~ "Changes to be committed" ]]; then
+    echo -n "◆"
+  elif [[ $status =~ "Changes not staged for commit" ]]; then
+    echo -n "◆"
+  elif [[ $status =~ "nothing to commit, working directory clean" ]]; then
+    echo -n "•"
   fi
 }
 

@@ -38,7 +38,7 @@ fi
 [ -z "$PS1" ] && exit
 
 # Переменная окружения PATH
-export PATH=/usr/local/bin:/usr/local/sbin:$PATH
+export PATH=$HOME/bin:/usr/local/bin:/usr/local/sbin:$PATH
 
 # Настройка истории команд
 # Убивать дубликаты истории самым жестоким образом
@@ -63,6 +63,7 @@ shopt -s checkwinsize
 # Важно vim, а не vi
 export EDITOR='vim'
 export RUBYOPT=''
+export JRUBY_OPTS='--client -J-XX:+TieredCompilation -J-XX:TieredStopAtLevel=1 -X-C'
 
 # make less more friendly for non-text input files, see lesspipe(1)
 #[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
@@ -100,12 +101,12 @@ if [ "$COLOR_TERM" = yes ]; then
   # чтобы не поломать приглашение при возврате длинных команд.
   # Необходимо особо отметить, что между \[...\]
   # должна быть только управляющая последовательность.
-  # Вызов функций или команд не редко должен осуществляться в \$(...),
+  # Вызов функций или команд должен осуществляться в \$(...),
   # чтобы изменяемые значения изменялись в самом приглашении.
   # Эталонный рабочий вариант где ничего не поломано:,
   # PS1="\[\$(coluser)\]\u\[${COLD}\]@\h:\[\$(colpwd)\]\w\[${COLD}\]\\$ "
   # PS1="\[\$(coluser)\]\u\[$COLD\]@\h:\[\$(colpwd)\]\w\[$COLD\]\\$ "
-  PS1="\[\$(coluser)\]\u\[$COLD\]@\h:\[\$(colpwd)\]\W\[\$(colgit)\]\$(gitbranch)\[$COLD\]\\$ "
+  PS1="\[\$(colpwd)\]\w\[$COLD\]\[\$(colgit)\]\$(gitbranch)\[$COLD\]\[\$(gitstatuscol)\]\$(gitstatussign)\[$COLD\] "
 else
   PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
 fi
@@ -282,10 +283,29 @@ alias rkdbm='rake db:migrate'
 # Тесты
 alias rksp='rake spec'
 
+# JDK Select
+# Based on http://superuser.com/questions/490425/how-do-i-switch-between-java-7-and-java-6-on-os-x-10-8-2/568016#568016
+function jdkselect() {
+  function removeFromPath() {
+    export PATH=$(echo $PATH | sed -E -e "s;:$1;;" -e "s;$1:?;;")
+  }
+  if [ $# -ne 0 ]; then
+    removeFromPath '/System/Library/Frameworks/JavaVM.framework/Home/bin'
+    if [ -n "${JAVA_HOME+x}" ]; then
+      removeFromPath $JAVA_HOME
+    fi
+    export JAVA_HOME=`/usr/libexec/java_home -v $@`
+    export PATH=$JAVA_HOME/bin:$PATH
+    echo "Using: $(java -version 2>&1 | head -2 | tail -1)"
+  else
+    echo "Example: jdkselect 1.7"
+  fi
+}
+
+# This loads NVM
+[[ -s "$HOME/.nvm/nvm.sh" ]] && . /Users/sashaegorov/.nvm/nvm.sh
+export NODE_PATH="$HOME/.nvm/$(nvm ls | grep current | tr -d "\t" | cut -d ' ' -f 2)/lib/node_modules/"
 # Enable Ruby Environment Manager (RVM).
 # This should be done at the end of file.
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 [[ -r $rvm_path/scripts/completion ]] && . $rvm_path/scripts/completion
-
-# This loads NVM
-[[ -s "$HOME/.nvm/nvm.sh" ]] && . /Users/sashaegorov/.nvm/nvm.sh 
