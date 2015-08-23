@@ -50,6 +50,8 @@ function gitstatuscol() {
     echo -en "${COLY}"
   elif [[ $status =~ "Changes not staged for commit" ]]; then
     echo -en "${COLR}"
+  elif [[ $status =~ "nothing added to commit but untracked files present" ]]; then
+    echo -en "${COLY}"
   elif [[ $status =~ "nothing to commit, working directory clean" ]]; then
     echo -en "${COLG}"
   fi
@@ -62,6 +64,8 @@ function gitstatussign() {
     echo -n "◆"
   elif [[ $status =~ "Changes not staged for commit" ]]; then
     echo -n "◆"
+  elif [[ $status =~ "nothing added to commit but untracked files present" ]]; then
+    echo -n "•"
   elif [[ $status =~ "nothing to commit, working directory clean" ]]; then
     echo -n "•"
   fi
