@@ -1,7 +1,7 @@
 # Вывод определённого цвета, если текущий каталог доступен пользователю на запись.
 function colpwd() {
   if [ -w "${PWD}" ]; then
-    echo -en ${COLK}
+    echo -en ${BLDK}
   else
     echo -en ${COLR}
   fi
