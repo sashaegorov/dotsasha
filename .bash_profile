@@ -9,7 +9,7 @@
 __SOURCE="${BASH_SOURCE[0]}"
 __DIR="$( dirname "$__SOURCE" )"
 while [ -h "$__SOURCE" ]
-do 
+do
   __SOURCE="$(readlink "$__SOURCE")"
   [[ $__SOURCE != /* ]] && __SOURCE="$__DIR/$__SOURCE"
   __DIR="$( cd -P "$( dirname "$__SOURCE"  )" && pwd )"
@@ -162,7 +162,7 @@ if [ "$COLOR_TERM" = yes ]; then
   else
     _LS="${_LS} --color=auto --group-directories-first"
   fi
-	
+
   alias ls="${_LS}"
   # Прочее
   alias dir='dir --color=auto'
@@ -236,52 +236,7 @@ genpass () {
     # FIXME: gtr hardcoded
     gtr -cd 'A-Za-z0-9_#!$%^&*' < /dev/urandom | head -c ${l} | xargs echo
   done
-} 
-
-# Алаисы для Rails 2/3
-# http://matthewhutchinson.net/2010/9/19/rails-3-bash-aliases-and-irbrc-configs
-alias r='rails'
-
-# Консоль
-rc () {
-  if [ -f ./script/rails ]; then 
-    rails c $@
-  else
-    ./script/console $@
-  fi
 }
-
-# Генератор
-rg () {
-  if [ -f ./script/rails ]; then
-    rails g $@
-  else
-    ./script/generate $@
-  fi
-}
-
-# Сервер
-rs () {
-  if [ -f ./script/rails ]; then 
-    rails s $@
-  else
-    ./script/server $@
-  fi
-}
-
-# Сервер в боевом режиме
-rsp () {
-  if [ -f ./script/rails ]; then 
-    sudo rails s -p80 $@
-  else
-    sudo ./script/server -p80 $@
-  fi
-}
-
-# Миграция базы
-alias rkdbm='rake db:migrate'
-# Тесты
-alias rksp='rake spec'
 
 # JDK Select
 # Based on http://superuser.com/questions/490425/how-do-i-switch-between-java-7-and-java-6-on-os-x-10-8-2/568016#568016
