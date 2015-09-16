@@ -106,7 +106,7 @@ if [ "$COLOR_TERM" = yes ]; then
   # Эталонный рабочий вариант где ничего не поломано:,
   # PS1="\[\$(coluser)\]\u\[${COLD}\]@\h:\[\$(colpwd)\]\w\[${COLD}\]\\$ "
   # PS1="\[\$(coluser)\]\u\[$COLD\]@\h:\[\$(colpwd)\]\w\[$COLD\]\\$ "
-  PS1="\[\$(colpwd)\]\w\[$COLD\]\[\$(colgit)\]\$(gitbranch)\[$COLD\]\[\$(gitstatuscol)\]\$(gitstatussign)\[$COLD\] "
+  PS1="\[\$(colpwd)\]\W\[$COLD\]\[\$(colgit)\]\$(gitbranch)\[$COLD\]\[\$(gitstatuscol)\]\$(gitstatussign)\[$COLD\] "
 else
   PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
 fi
