@@ -1,3 +1,6 @@
+# Atom alias : - )
+alias a='atom'
+
 # RVM aliases
 alias rg='rvm use ruby-2.1.6@global'
 alias rr='rvm use ruby-2.1.6@rails'
