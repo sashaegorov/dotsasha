@@ -1,2 +1,1 @@
-gem: --no-rdoc --no-ri
-# rdoc: --inline-source --line-numbers
+gem: --no-document
