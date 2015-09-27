@@ -1,11 +1,5 @@
 #!/bin/bash -x
-# Файл пользовательских настроек ~/.bashrc
-# Исполняется bash(1) для интерактивных сеансов.
-# На Mac может потребоваться добавить
-# ln -s .bashrc .bash_profile
-
-# Небольшой хелпер помогающий определить каталог в котором лежит скрипт
-# Источник: http://stackoverflow.com/questions/59895/can-a-bash-script-tell-what-directory-its-stored-in
+# Find current dir: http://stackoverflow.com/questions/59895/can-a-bash-script-tell-what-directory-its-stored-in
 __SOURCE="${BASH_SOURCE[0]}"
 __DIR="$( dirname "$__SOURCE" )"
 while [ -h "$__SOURCE" ]
@@ -16,7 +10,7 @@ do
 done
 REAL_DIR="$( cd -P "$( dirname "$__SOURCE" )" && pwd )"
 
-# Подгрузка всякого полезного
+# Load scripts
 . $REAL_DIR/colors.sh     # Определение цветов
 . $REAL_DIR/aliases.sh    # Алиасы
 . $REAL_DIR/services.sh   # Сервисы
@@ -49,7 +43,7 @@ export HISTSIZE=32768
 # Формат времени истории команд (2010-12-09 02:34:01 MSK)
 export HISTTIMEFORMAT='%F %T %Z '
 # Игнорировать все двух буквенные команды
-export HISTIGNORE='??'
+export HISTIGNORE='?'
 
 # Настройки оболочки
 # Дописывать историю, не удалять
@@ -61,7 +55,7 @@ shopt -s checkwinsize
 
 # Важные переменные окружения
 # Важно vim, а не vi
-export EDITOR='vim'
+export EDITOR='atom'
 export RUBYOPT=''
 export JRUBY_OPTS='--client -J-XX:+TieredCompilation -J-XX:TieredStopAtLevel=1 -X-C'
 
@@ -126,10 +120,6 @@ esac
 # You may want to put all your additions into a separate file like
 # ~/.bash_aliases, instead of adding them here directly.
 # See /usr/share/doc/bash-doc/examples in the bash-doc package.
-
-#if [ -f ~/.bash_aliases ]; then
-#    . ~/.bash_aliases
-#fi
 
 # Ну это тоже надо куда-то деть...
 alias su='sudo su'
@@ -258,8 +248,9 @@ function jdkselect() {
 }
 
 # This loads NVM
-[[ -s "$HOME/.nvm/nvm.sh" ]] && . /Users/sashaegorov/.nvm/nvm.sh
-export NODE_PATH="$HOME/.nvm/$(nvm ls | grep current | tr -d "\t" | cut -d ' ' -f 2)/lib/node_modules/"
+[[ -s "$HOME/.nvm/nvm.sh" ]] && . $HOME/.nvm/nvm.sh
+export NODE_PATH="$HOME/.nvm/versions/node/$(nvm ls | grep ^default | tr -d "\t" | cut -d ' ' -f 3)/lib/node_modules/"
+
 # Enable Ruby Environment Manager (RVM).
 # This should be done at the end of file.
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*

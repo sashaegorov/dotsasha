@@ -2,8 +2,8 @@
 alias a='atom'
 
 # RVM aliases
-alias rg='rvm use ruby-2.1.6@global'
-alias rr='rvm use ruby-2.1.6@rails'
+alias rg='rvm use ruby-2.2.3@global'
+alias rr='rvm use ruby-2.2.3@rails'
 alias rv='rvm current'
 
 # RubyGems aliases
@@ -37,7 +37,7 @@ alias rar='be spring rake routes'
 alias radm='be spring rake db:migrate'
 
 # Rails logs, tailing and cleaning
-alias ctl='> ./log/test.log'
 alias cdl='> ./log/development.log'
+alias ctl='> ./log/test.log'
 alias tld='cdl && tail -f ./log/development.log'
-alias tlt='cdl && tail -f ./log/test.log'
+alias tlt='ctl && tail -f ./log/test.log'
