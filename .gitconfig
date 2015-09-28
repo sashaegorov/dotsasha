@@ -6,7 +6,7 @@
 [instaweb]
 	httpd = webrick
 [core]
-  editor = mate -w
+  editor = atom -w
 [merge]
 	tool = vimdiff
 [push]
