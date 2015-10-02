@@ -6,12 +6,6 @@ require 'rubygems'
 
 IRB.conf[:PROMPT_MODE] = :SIMPLE
 
-begin # Interactive editor
-  require 'interactive_editor'
-  rescue LoadError => error
-    $stderr.puts "Couldn't load Interactive editor: #{error}"
-end
-
 begin # Wirble
  require 'wirble'
   Wirble.init
@@ -45,4 +39,3 @@ end
 # -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
 alias q exit
-
