@@ -5,6 +5,7 @@ Add this to `.config/fish/config.fish`:
 ```
 # Load aliases
 . $HOME/.dotsasha/aliases.fish
+. $HOME/.dotsasha/functions.fish
 ```
 
 ## Functions
