@@ -217,17 +217,6 @@ huniq () { history | awk '{print $5}' | grep -e $1 | sort -s | uniq -c; }
 # Функция перемещения конфигурационных файлов в Git-репозиторий
 dotsasha () { mv -i $1 dotsasha/ && ln -s dotsasha/$1 . && ls -lR */$1 $1; }
 
-# А вот не надо расслабляться...
-genpass () {
-  # FIXME Broken on Mac's `tr`
-  local l=$1
-  for i in {1..5}; do
-    [ "$l" == "" ] && l=16
-    # FIXME: gtr hardcoded
-    gtr -cd 'A-Za-z0-9_#!$%^&*' < /dev/urandom | head -c ${l} | xargs echo
-  done
-}
-
 # JDK Select
 # Based on http://superuser.com/questions/490425/how-do-i-switch-between-java-7-and-java-6-on-os-x-10-8-2/568016#568016
 function jdkselect() {
