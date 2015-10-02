@@ -42,10 +42,25 @@ function -d 'Add all aliases' dotsasha_alases
   # Rails 4 aliases
   # http://matthewhutchinson.net/2010/9/19/rails-3-bash-aliases-and-irbrc-configs
   # TODO: Make it some how better.
+  function __dotsasha_rails_env -v RAILS_ENV
+    echo -n 'RAILS_ENV set to: '
+    switch $RAILS_ENV
+      case "development"
+        set_color green
+      case "test"
+        set_color yellow
+      case "production"
+        set_color red
+      case "*"
+        echo Unknown RAILS_ENV environment
+    end
+    echo $RAILS_ENV
+    set_color normal
+  end
   # Sorry `ed`. Nobody uses you.
-  abblias "ed=set -xg RAILS_ENV development; and echo -e Rails {\$RAILS_ENV}"
-  abblias "et=set -xg RAILS_ENV test; and echo -e Rails {\$RAILS_ENV}"
-  abblias "ep=set -xg RAILS_ENV production; and echo -e Rails {\$RAILS_ENV}"
+  abblias "ed=set -xg RAILS_ENV development"
+  abblias "et=set -xg RAILS_ENV test"
+  abblias "ep=set -xg RAILS_ENV production"
 
   # TODO: Make it functions
   # Most of these works only if Gemfile present in current directory
