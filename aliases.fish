@@ -65,7 +65,7 @@ function -d 'Add all aliases' dotsasha_alases
   # TODO: Make it functions
   # Most of these works only if Gemfile present in current directory
   abblias "r=bundle exec spring rails"
-  abblias "f=bundle exec spring foreman"
+  abblias "f=bundle exec foreman"
   abblias "rake=bundle exec spring rake"
   abblias "rat=bundle exec spring rake -T --all | less"
   abblias "rar=bundle exec spring rake routes"
