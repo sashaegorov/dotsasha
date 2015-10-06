@@ -5,3 +5,6 @@ set -g OMF_PATH $HOME/.local/share/omf
 source $OMF_PATH/init.fish
 # Load fishmarks (http://github.com/techwizrd/fishmarks)
 . $HOME/.fishmarks/marks.fish
+# Load aliases
+. $HOME/.dotsasha/aliases.fish
+. $HOME/.dotsasha/functions.fish
