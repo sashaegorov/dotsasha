@@ -10,3 +10,4 @@ source $OMF_PATH/init.fish
 . $HOME/.dotsasha/functions.fish
 
 set -g theme_display_git_ahead_verbose yes
+set -g theme_date_format "+%a %H:%M"
