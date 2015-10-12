@@ -11,3 +11,5 @@ source $OMF_PATH/init.fish
 
 set -g theme_display_git_ahead_verbose yes
 set -g theme_date_format "+%a %H:%M"
+set -g theme_display_ruby auto
+set -g theme_display_ruby_format g
