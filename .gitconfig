@@ -7,7 +7,3 @@
 	httpd = webrick
 [core]
   editor = atom -w
-[merge]
-	tool = vimdiff
-[push]
-	default = simple
