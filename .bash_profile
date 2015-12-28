@@ -10,11 +10,6 @@ do
 done
 REAL_DIR="$( cd -P "$( dirname "$__SOURCE" )" && pwd )"
 
-# Load scripts
-. $REAL_DIR/colors.sh     # Определение цветов
-. $REAL_DIR/aliases.sh    # Алиасы
-. $REAL_DIR/services.sh   # Сервисы
-
 # Автозавершения комманд Bash
 # Необходим `brew install bash-completion`
 # Это можно не делать, если автозавершения загружаются из /etc/
@@ -177,32 +172,6 @@ alias ...='cd ../..'
 alias cp='cp -i'
 alias mv='mv -i'
 
-# Автозавершение для Rake
-# https://github.com/ai/rake-completion/blob/master/rake
-export COMP_WORDBREAKS=${COMP_WORDBREAKS/\:/}
-_rakecomplete() {
-  if [ -f Rakefile ]; then
-    recent=`ls -t tmp/aux/.rake_tasks Rakefile **/*.rake 2> /dev/null | head -n 1`
-    if [ ! -d tmp/aux ]; then
-      mkdir -p tmp/aux
-    fi
-    if [[ $recent != 'tmp/aux/.rake_tasks' ]]; then
-      rake --silent --tasks | cut -d " " -f 2 > tmp/aux/.rake_tasks
-    fi
-    COMPREPLY=($(compgen -W "`cat tmp/aux/.rake_tasks`" -- ${COMP_WORDS[COMP_CWORD]}))
-    return 0
-  fi
-}
-
-complete -o default -o nospace -F _rakecomplete rake
-
-# TODO:
-# Нечто похожее можно сделать для gem
-# gem help commands | egrep "^ " | awk '{print $1}'
-# Кешировать надо в ~/.bashcomplete/KEY
-# где, KEY это что-то вроде:
-# pwd | md5sum | awk '{print $1}'
-
 # Пользовательские функции
 # Настолько полезная штука, что это просто не передать словами - одни эмоции
 psgrep () { ps auxww | egrep --color=always "$1" | grep -v "egrep.*$1"; }
@@ -235,12 +204,3 @@ function jdkselect() {
     echo "Example: jdkselect 1.7"
   fi
 }
-
-# This loads NVM
-[[ -s "$HOME/.nvm/nvm.sh" ]] && . $HOME/.nvm/nvm.sh
-export NODE_PATH="$HOME/.nvm/versions/node/$(nvm ls | grep ^default | tr -d "\t" | cut -d ' ' -f 3)/lib/node_modules/"
-
-# Enable Ruby Environment Manager (RVM).
-# This should be done at the end of file.
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
-[[ -r $rvm_path/scripts/completion ]] && . $rvm_path/scripts/completion
