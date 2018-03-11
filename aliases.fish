@@ -1,3 +1,6 @@
+# Preclean
+for a in (abbr -l); abbr -e $a; end
+
 # First attempt to move abbliases to Fish
 
 function abblias
@@ -5,14 +8,9 @@ function abblias
   abbr -a $argv
 end
 
-function -d 'Add all aliases' dotsasha_alases
+function dotsasha_alases -d 'Add all aliases'
   # Atom
   abblias "a=atom ."
-
-  # RVM
-  abblias "rg=rvm use ruby-2.2.3@global"
-  abblias "rr=rvm use ruby-2.2.3@rails"
-  abblias "rv=rvm current"
 
   # RubyGems
   abblias "gel=gem list"
@@ -21,19 +19,26 @@ function -d 'Add all aliases' dotsasha_alases
   abblias "geus=gem update --system"
 
   # Git
-  abblias "gs=git status --short"
+  abblias "ga=git add -A ."
+  abblias "gp=git pull"
+  abblias "gc=git checkout"
   abblias "gd=git diff"
   abblias "gdc=git diff --cached"
   abblias "gds=git diff --stat"
-  abblias "ga=git add"
-  abblias "gai=git add --interactive"
-  abblias "gi=git instaweb"
-  abblias "gf=git fetch"
-  abblias "gfa=git fetch --all"
+  abblias "gf=git fetch --all --prune"
   abblias "gl=git log"
-  abblias "glo=git log --oneline"
   abblias "gla=git log --pretty --stat HEAD^..HEAD"
-  abblias "gc=glo --color| head -5;git commit"
+  abblias "glo=git log --oneline"
+  abblias "gs=git status --short"
+
+  # Node/npm/nvm
+  abblias "nu=nvm use"
+  abblias "nc=nvm current"
+  abblias "nrc=node -v > .nvmrc"
+  abblias "nv=node -v"
+  abblias "nr=npm run"
+  abblias "ni=npm install"
+  abblias "nri=npm cache clean --force; and npm install"
 
   # Bundler
   abblias "bi=bundle install"
@@ -76,3 +81,5 @@ function -d 'Add all aliases' dotsasha_alases
   abblias "tld=cdl; and tail -f ./log/development.log"
   abblias "tlt=ctl; and tail -f ./log/test.log"
 end
+
+dotsasha_alases
